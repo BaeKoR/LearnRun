@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+
+<definition name="mainpage" template="/WEB-INF/views/layout/layout.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+	<put-attribute name="menu" value="/WEB-INF/views/mainpage/menu.jsp" />
+	<put-attribute name="content" value="/WEB-INF/views/mainpage/content.jsp" />
+	<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+</definition>
+<!-- examples
+<definition name="bbslist" extends="login">
+	<put-attribute name="content" value="/WEB-INF/views/bbs/bbslist.jsp" />
+</definition>
+
+<definition name="bbswrite" extends="login">
+	<put-attribute name="content" value="/WEB-INF/views/bbs/bbswrite.jsp" />
+</definition>
+-->
+</tiles-definitions>
