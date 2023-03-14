@@ -29,6 +29,11 @@
 <definition name="mypage/*" extends="layout">
 	<put-attribute name="menu" value="/WEB-INF/views/mypage/menu.jsp" />
 	<put-attribute name="content" value="/WEB-INF/views/mypage/{1}.jsp" />
+	<put-attribute name="current" value="{1}" cascade="true"/>
+</definition>
+
+<definition name="message" template="/WEB-INF/views/layout/meslayout.jsp">
+	<put-attribute name="after" value="/WEB-INF/views/layout/message.jsp"/>
 </definition>
 
 

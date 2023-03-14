@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.semi.learn.dao.MemberDao;
+import com.semi.learn.dto.MemberDto;
 
 @Repository
 public class MemberDaoImpl implements MemberDao{
@@ -12,7 +13,13 @@ public class MemberDaoImpl implements MemberDao{
 	@Autowired // 자동생성
 	SqlSession session;
 	
-	String ns = "Member."; // ns: namespace
+	String ns = "Member.";
+
+	@Override
+	public int delMember(MemberDto dto) {
+		return session.delete(ns + "delMember", dto);
+	}
+	
 }
 
 
