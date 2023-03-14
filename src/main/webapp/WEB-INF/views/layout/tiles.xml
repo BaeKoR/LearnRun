@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+
+<definition name="layout" template="/WEB-INF/views/layout/layout.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+	<put-attribute name="menu" value="/WEB-INF/views/layout/menu.jsp" />
+	<put-attribute name="content" value="" />
+	<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+</definition>
+
+<!-- 실제 페이지 -->
+<definition name="mainpage" template="/WEB-INF/views/layout/mainlayout.jsp">
+	<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+	<put-attribute name="content" value="/WEB-INF/views/mainpage/content.jsp" />
+	<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+</definition>
+
+<definition name="login/*" extends="mainpage">
+	<put-attribute name="content" value="/WEB-INF/views/login/{1}.jsp" />
+</definition>
+
+<definition name="cls/*" extends="layout">
+	<put-attribute name="menu" value="/WEB-INF/views/cls/menu.jsp" />
+	<put-attribute name="content" value="/WEB-INF/views/cls/{1}.jsp" />
+</definition>
+
+<definition name="mypage/*" extends="layout">
+	<put-attribute name="menu" value="/WEB-INF/views/mypage/menu.jsp" />
+	<put-attribute name="content" value="/WEB-INF/views/mypage/{1}.jsp" />
+</definition>
+
+
+<!-- examples
+<definition name="bbslist" extends="login">
+	<put-attribute name="content" value="/WEB-INF/views/bbs/bbslist.jsp" />
+</definition>
+
+<definition name="bbswrite" extends="login">
+	<put-attribute name="content" value="/WEB-INF/views/bbs/bbswrite.jsp" />
+</definition>
+-->
+</tiles-definitions>
