@@ -8,7 +8,7 @@ public class MemberDto implements Serializable{
 	private String name;		// 이름
 	private String email;		// 이메일
 	private String phone;		// 전화번호
-	private int auth;			// 0:일반회원 1:관리자
+	private int auth;			// 0:관리자, 3:일반회원
 	private String filename;	// 파일명
 	private String newfilename;
 	

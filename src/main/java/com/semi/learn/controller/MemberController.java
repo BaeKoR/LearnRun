@@ -4,29 +4,49 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.semi.learn.dto.MemberDto;
 import com.semi.learn.service.MemberService;
 
 @Controller
 public class MemberController {
-	// service 접근(생성)
-	@Autowired
-	MemberService service; // db는 무조건 service를 통한다
 	
-	@GetMapping(value = "mainpage")
-	public String mainpage() {
-		System.out.println("MemberController mainpage " + new Date());
-		
-		return "mainpage";
-	}
+	@Autowired
+	MemberService service;
 	
 	@GetMapping(value = "login")
 	public String login() {
-		System.out.println("MemberController login " + new Date());
 		
 		return "login/login";
 	}
+	
+	@GetMapping("updateMember")
+	public String updateMember() {
+		
+		return "mypage/updateMember";
+	}
+	
+	@GetMapping("quit")
+	public String quit() {
+		
+		return "mypage/quit";
+	}
+	
+	@PostMapping("quitAf")
+	public String quitAf(MemberDto dto, Model model) {
+		String quit = "";
+		if(service.delMember(dto)) {
+			quit = "OK";
+		} else {
+			quit = "NO";
+		}
+		model.addAttribute("quit", quit);
+		return "message";
+	}
+	
 }
 
 
