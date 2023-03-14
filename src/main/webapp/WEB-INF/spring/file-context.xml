@@ -15,7 +15,7 @@
 	</bean>
 	
 	download
-	<bean id="downloadView" class="mul.cam.a.util.DownloadView" />
+	<bean id="downloadView" class="com.semi.learn.util.DownloadView" />
 	DownloadView downloadView = new DownloadView();
 	
 	<bean id="downloadViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
