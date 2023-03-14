@@ -3,7 +3,7 @@
 <tilesx:useAttribute name="current" />
 
 <%
-/* 로그인 세션 가져오기 */
+/* 로그인 세션 가져오기 (테스트하려면 아래 href의 아이디 수정) */
 %>
 
 <div class="container">

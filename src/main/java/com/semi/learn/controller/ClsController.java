@@ -37,29 +37,11 @@ public class ClsController {
 	}
 	
 	@GetMapping("myReview")
-	public String myReview(ReviewParam param, Model model) {
+	public String myReview(String id, Model model) {
 		
-//		Map<String, Object> map = 원글의 제목 가져오기
-		
-		int pn = param.getPageNumber();
-		int start = (pn * 5) + 1;
-		int end = (pn + 1) * 5;
-		
-		param.setStart(start);
-		param.setEnd(end);
-		
-		List<Map<String, Object>> list = service.getMyReview(param);
-		System.out.println(list.toString());
-		int len = list.size();
-		
-		int totalPages = len / 5;
-		if((len % 5) > 0) {
-			totalPages += 1;
-		}
-		
+		List<Map<String, Object>> list = service.getMyReview(id);
+	
 		model.addAttribute("myReview", list);
-		model.addAttribute("pageNumber", pn);
-		model.addAttribute("totalPages", totalPages);
 		
 		return "mypage/myReview";
 	}

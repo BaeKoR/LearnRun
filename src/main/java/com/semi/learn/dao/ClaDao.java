@@ -7,5 +7,5 @@ import com.semi.learn.dto.ReviewParam;
 
 public interface ClaDao {
 	
-	List<Map<String, Object>> getMyReview(ReviewParam param);
+	List<Map<String, Object>> getMyReview(String id);
 }

@@ -20,8 +20,8 @@ public class ClaDaoImpl implements ClaDao {
 	String ns = "Cls.";
 
 	@Override
-	public List<Map<String, Object>> getMyReview(ReviewParam param) {
-		return session.selectList(ns + "getMyReview", param);
+	public List<Map<String, Object>> getMyReview(String id) {
+		return session.selectList(ns + "getMyReview", id);
 	}
 
 }

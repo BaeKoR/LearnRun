@@ -17,8 +17,8 @@ public class ClsServiceImpl implements ClsService {
 	ClaDao dao;
 
 	@Override
-	public List<Map<String, Object>> getMyReview(ReviewParam param) {
-		return dao.getMyReview(param);
+	public List<Map<String, Object>> getMyReview(String id) {
+		return dao.getMyReview(id);
 	}
 	
 	

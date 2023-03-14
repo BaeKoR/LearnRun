@@ -16,6 +16,6 @@
 
 <form action="quitAf" method="post">
 	<input type="hidden" name="id" value="" /><!-- 세션저장된 아이디 -->
-	<input type="password" name="pwd" class="form-control"/>
-	<input type="submit" value="탈퇴하기" class="btn-primary"/>
+	<input type="password" name="pwd" class="form-control" placeholder="비밀번호 입력"/>
+	<input type="submit" value="탈퇴하기" class="btn btn-primary"/>
 </form>

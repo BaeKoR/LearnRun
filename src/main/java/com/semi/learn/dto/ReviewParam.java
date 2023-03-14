@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class ReviewParam implements Serializable {
 	
 	private int cls_seq;
-	private String id;
 	private int pageNumber;	// [1][2][3]
 	
 	private int start;
@@ -13,10 +12,9 @@ public class ReviewParam implements Serializable {
 	
 	public ReviewParam() {}
 
-	public ReviewParam(int cls_seq, String id, int pageNumber, int start, int end) {
+	public ReviewParam(int cls_seq, int pageNumber, int start, int end) {
 		super();
 		this.cls_seq = cls_seq;
-		this.id = id;
 		this.pageNumber = pageNumber;
 		this.start = start;
 		this.end = end;
@@ -28,14 +26,6 @@ public class ReviewParam implements Serializable {
 
 	public void setcls_seq(int cls_seq) {
 		this.cls_seq = cls_seq;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public int getPageNumber() {
@@ -64,7 +54,7 @@ public class ReviewParam implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ReviewParam [cls_seq=" + cls_seq + ", id=" + id + ", pageNumber=" + pageNumber + ", start=" + start + ", end="
+		return "ReviewParam [cls_seq=" + cls_seq + ", pageNumber=" + pageNumber + ", start=" + start + ", end="
 				+ end + "]";
 	}
 	
