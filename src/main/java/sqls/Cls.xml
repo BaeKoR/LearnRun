@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Cls">
+
+<!-- 클래스 목록 -->
+<select id="clslist" parameterType="com.semi.learn.dto.ClsParam" resultType="com.semi.learn.dto.ClsDto">
+	select seq, id, category, title, content, wdate, recommend, filename, newfilename
+	from cls
+	where 1=1 
+		<if test="category != null and category != ''">
+			and category = #{category}
+		</if>
+		<if test="search != null and search != ''">
+			and title like concat('%', #{search}, '%')
+		</if>
+</select>
+
+<!-- 추천 클래스 목록 -->
+<select id="recClslist" parameterType="String" resultType="com.semi.learn.dto.ClsDto">
+	select seq, id, category, title, content, wdate, recommend, filename, newfilename
+	from cls
+	where category = #{category} and recommend = 1
+</select>
+
+<!-- 인기 클래스 목록 -->
+<select id="bestClslist" resultType="com.semi.learn.dto.ClsDto">
+	select a.*, count(*) from cls a
+	inner join likecls b
+	on a.seq = b.seq
+	group by a.seq
+	order by count(*) desc
+</select>
+
+</mapper>
