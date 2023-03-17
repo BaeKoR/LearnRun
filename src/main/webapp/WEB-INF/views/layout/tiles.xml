@@ -41,8 +41,9 @@
 	<put-attribute name="content" value="/WEB-INF/views/cls/{1}.jsp" />
 </definition>
 
-<definition name="login/*" extends="defaultlayout">
-	<put-attribute name="content" value="/WEB-INF/views/login/{1}.jsp" />
+<!-- 로그인 수정 확인하기-->
+<definition name="login/login" extends="defaultlayout">
+	<put-attribute name="content" value="/WEB-INF/views/login/login.jsp" />
 </definition>
 
 <definition name="mypage/*" extends="layout">
@@ -62,5 +63,29 @@
 <definition name="message" template="/WEB-INF/views/layout/meslayout.jsp">
 	<put-attribute name="after" value="/WEB-INF/views/layout/message.jsp"/>
 </definition>
+
+
+<!-- 송이 -->
+<!-- 회원가입화면 -->
+<definition name="login/regi" extends="defaultlayout">
+	<put-attribute name="content" value="/WEB-INF/views/login/regi.jsp" />
+</definition>
+
+<!-- 비밀번호 찾기 -->
+<definition name="login/findpwd" extends="defaultlayout">
+	<put-attribute name="content" value="/WEB-INF/views/login/findpwd.jsp" />
+</definition>
+
+<!-- 비밀번호 재설정 -->
+<definition name="login/pwdupdate" extends="defaultlayout">
+	<put-attribute name="content" value="/WEB-INF/views/login/pwdupdate.jsp" />
+</definition>
+
+<!-- 아이디 찾기 -->
+<definition name="login/findid" extends="defaultlayout">
+	<put-attribute name="content" value="/WEB-INF/views/login/findid.jsp" />
+</definition>
+
+
 
 </tiles-definitions>

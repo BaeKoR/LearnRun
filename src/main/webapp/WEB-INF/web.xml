@@ -26,6 +26,9 @@ version="4.0">
 			/WEB-INF/spring/servlet-context.xml
 			/WEB-INF/spring/aop-context.xml
 			<!-- /WEB-INF/spring/file-context.xml -->
+			
+			<!-- email -->
+			/WEB-INF/spring/email-context.xml
 		</param-value>
 	</init-param>
 	
