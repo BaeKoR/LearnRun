@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Lesson">
+
+	<select id="getLesson" parameterType="Integer" resultType="com.semi.learn.dto.LessonDto">
+		select * from lesson
+		where seq=#{les_seq}
+	</select>
+	
+	<select id="getLessonList" parameterType="Integer" resultType="com.semi.learn.dto.LessonDto">
+		select * from lesson
+		where cls_seq=#{cls_seq}
+	</select>
+	
+	<select id="getClsTitle" parameterType="Integer" resultType="String">
+		select title from cls
+		where seq=#{cls_seq}
+	</select>
+	
+	<select id="getQnaList" parameterType="com.semi.learn.dto.QnaParam" resultType="com.semi.learn.dto.QnaDto">
+		select seq, les_seq, ref, step, id, content, wdate
+		from (select row_number()over(order by ref desc, step) rnum,
+			seq, les_seq, ref, step, id, content, wdate
+			from qna
+			where les_seq=${les_seq}
+			order by ref desc, step) a
+		where rnum between ${start} and ${end}
+	</select>
+	
+	<select id="countQna" parameterType="Integer" resultType="Integer">
+		select ifnull(count(*), 0)
+		from qna
+		where les_seq=#{les_seq}
+	</select>
+	
+	<insert id="writeQue" parameterType="com.semi.learn.dto.QnaDto">
+		insert into qna(les_seq, ref, step, id, content, wdate)
+		values(#{les_seq}, (select ifnull(max(ref), 0)+1 from qna a), 
+			0, #{id}, #{content}, now())
+	</insert>
+	
+	<insert id="writeAns" parameterType="com.semi.learn.dto.QnaDto">
+		insert into qna(les_seq, ref, step, id, content, wdate)
+		values(#{les_seq}, (select ref from qna a where seq=#{seq}),
+					  (select step from qna b where seq=#{seq})+1,
+					  #{id}, #{content}, now())
+	</insert>
+</mapper>
