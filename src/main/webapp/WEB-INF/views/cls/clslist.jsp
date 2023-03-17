@@ -18,52 +18,38 @@ if(category == "" || category == null){
 }
 %>
 
-<div style="height: 10%">
+<div style="height: 10%;">
 <h2><%=pageTitle %></h2>
 </div>
 
-<div style="height: 90%">
-<table width="100%" border="1" style="text-align: center; padding-left: 10%; padding-right: 10%;">
-	<colgroup>
-		<col width="25%">
-		<col width="25%">
-		<col width="25%">
-		<col width="25%">
-	</colgroup>
-
-	<tbody>
-		<%
+<div style="height: 90%;">
+<div class="clslist-grid">
+	<ul class="clslist-ul">
+	<%
 		if(list == null || list.size() == 0){
 		%>
-			<tr>
-				<td colspan="4">클래스가 없습니다.</td>
-			</tr>
+			<p>클래스가 없습니다.</p>
 		<%
 		}
 		else {
-			int i = 0;
-			while(i<list.size())
+			for(int i=0; i<list.size(); i++)
 			{
+				ClsDto cls = list.get(i);
 				%>
-				<tr>
-					<%
-					for(int j=0; i<list.size()&&j<4; j++){
-						ClsDto cls = list.get(i);
-						%>
-						<td>
-							<a href="clsDetail?seq=<%=cls.getSeq() %>">
-								<%=cls.getTitle() %>
-							</a>
-						</td>
-						<%
-						i++;
-					}
-					%>
-				</tr>
+				<li class="clslist-li">
+					<a href="/LearnRun/clsDetail?seq=<%=cls.getSeq() %>">
+						<figure class="clslist-fig">
+							<img src="..." alt="클래스이미지">
+						</figure>
+						<div><%=cls.getCategory() %></div>
+						<div><%=cls.getTitle() %></div>
+						<div><%=cls.getId() %></div>
+					</a>
+				</li>
 				<%
 			}
 		}
-		%>
-	</tbody>
-</table>
+	%>
+	</ul>
+</div>
 </div>

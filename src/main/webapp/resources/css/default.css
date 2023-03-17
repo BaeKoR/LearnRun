@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/* clslist */
+.clslist-grid {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+.clslist-title {
+	padding-left: 1rem;
+	padding-bottom: 2rem;
+}
+.clslist-ul {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.clslist-li {
+	flex-basis: 20%;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+.clslist-fig {
+	overflow: hidden;
+	border-radius: 1rem;
+	width: 220px;
+	height: 130px;
+	background-color: gray;
+}
