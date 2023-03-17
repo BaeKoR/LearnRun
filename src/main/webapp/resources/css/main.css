@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+/* carousel slider */
+.carousel-caption {
+    right: 0;
+    left: 15%;
+    padding-bottom: 40px;
+    text-align: left;
+    -webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+}
+
+/* clslist */
+.clslist-grid {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4rem;
+	text-align: left;
+}
+.clslist-title {
+	padding-left: 1rem;
+	padding-bottom: 2rem;
+}
+.clslist-ul {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.clslist-li {
+	flex-basis: 25%;
+	padding-right: 1rem;
+	padding-left: 1rem;
+	margin-bottom: 1.5rem;
+}
+.clslist-fig {
+	overflow: hidden;
+	border-radius: 1rem;
+	width: 260px;
+	height: 160px;
+	background-color: gray;
+}

@@ -48,6 +48,19 @@
 <definition name="mypage/*" extends="layout">
 	<put-attribute name="menu" value="/WEB-INF/views/mypage/menu.jsp" />
 	<put-attribute name="content" value="/WEB-INF/views/mypage/{1}.jsp" />
+	<put-attribute name="current" value="{1}" cascade="true"/>
+</definition>
+
+<!-- 강의 듣기 페이지 -->
+<definition name="lesson" template="/WEB-INF/views/layout/leslayout.jsp">
+	<put-attribute name="css" value="/resources/css/leslayout.css" />
+	<put-attribute name="navbar" value="/WEB-INF/views/lesson/navbar.jsp"/>
+	<put-attribute name="video" value="/WEB-INF/views/lesson/lesson.jsp"/>
+	<put-attribute name="sidebar" value="/WEB-INF/views/lesson/sidebar.jsp"/>
+</definition>
+
+<definition name="message" template="/WEB-INF/views/layout/meslayout.jsp">
+	<put-attribute name="after" value="/WEB-INF/views/layout/message.jsp"/>
 </definition>
 
 </tiles-definitions>

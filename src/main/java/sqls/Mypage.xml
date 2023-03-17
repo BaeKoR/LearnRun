@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Mypage">
+	<select id="getMyReview" parameterType="String" resultType="map">
+		select b.seq, b.title, a.content, a.wdate
+		from review a, cls b
+		where a.cls_seq=b.seq
+		and a.id=#{id}
+		order by a.wdate desc
+	</select>
+	
+	<delete id="delMember" parameterType="com.semi.learn.dto.MemberDto">
+		delete from member
+		where id=#{id} and pwd=#{pwd}
+	</delete>
+</mapper>
