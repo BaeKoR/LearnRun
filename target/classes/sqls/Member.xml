@@ -2,5 +2,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
+
+<!-- result타입 없음 -->
+<!-- 회원가입 -->
+<insert id="addMember" parameterType="com.semi.learn.dto.MemberDto">
+	insert into member(id, pwd, name, email, phone, auth, filename, newfilename)
+	values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, 3, null, null)	
+</insert>
 	
+<!-- 							들어오는값					return 값 -->
+<!-- 중복id체크 -->
+<select id="checkId" parameterType="java.lang.String" resultType="Integer">
+	select count(*)
+	from member
+	where id=#{id}
+</select>
+
+<!-- 가입되어있는 이메일인지 확인 -->
+
+<select id="emailCheck" parameterType="java.lang.String" resultType="Integer">
+	select count(*)
+	from member
+	where email=#{email}
+</select>
+
+
+ <!-- 로그인 -->
+<select id="login" parameterType="com.semi.learn.dto.MemberDto" resultType="com.semi.learn.dto.MemberDto">
+	select id, name, email
+	from member
+	where id=#{id} and pwd=#{pwd}
+</select>
+
+
+<!-- 비밀번호 재설정 -->
+<update id="pwdUpdate" parameterType="com.semi.learn.dto.MemberDto">
+	update member
+	set pwd=#{pwd}
+	where email=#{email}
+</update>
+
+<!-- 아이디 찾기 -->
+<select id="findId" parameterType="com.semi.learn.dto.MemberDto" resultType="com.semi.learn.dto.MemberDto">
+	select id
+	from member
+	where name=#{name} and email=#{email}
+</select>
+
+
+<!-- 이메일 -->
+
+<!-- 이메일 인증을 위한 랜덤번호 저장 -->
+<!-- 비밀번호재설정할때 아이디랑 이메일 입력둘다해보기 -->
+<update id="updateMailKey" parameterType="com.semi.learn.dto.MemberDto">
+    update member 
+    set mail_key=#{mail_key} where email=#{email} and id=#{id}
+</update> 
+	
+<!-- 메일 인증을 하면 mail_auth 컬럼을 기본값 0에서 1로 바꿔 로그인을 허용 -->
+
+<update id="updateMailAuth" parameterType="com.semi.learn.dto.MemberDto">
+    update member set mail_auth=1 where email=#{email} and mail_key=#{mail_key}
+</update>
+
+<!--  이메일 인증을 안 했으면 0을 반환, 로그인 시 인증했나 안 했나 체크하기 위함 (로그인할때 필요) -->
+<!-- 만일 여기서 0이 반환됐다면, '이메일 인증 후 다시 로그인을 시도해달라'라는 경고창 -->
+<select id="emailAuthFail" parameterType="String" resultType="int">
+    select count(*) from member where id=#{id} and mail_auth=1
+</select>
+
+
+
+
 </mapper>

@@ -1,3 +1,4 @@
+<%@page import="com.semi.learn.dto.MemberDto"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -5,6 +6,10 @@ String search = (String)request.getAttribute("search");
 if(search == null){
 	search = "";
 }
+
+//로그인 정보
+MemberDto login = (MemberDto)session.getAttribute("login");
+
 %>
 
 <div class="header-top">
@@ -18,7 +23,20 @@ if(search == null){
 	
 	<div class="header-right">
 		<a href="/LearnRun/myCls">마이페이지</a>
-		<a href="/LearnRun/login" style="margin-left: 15px">로그인</a>
+
+<!-- 로그아웃 처리 -->		
+<%
+if(login == null){
+	%>
+	<a href="/LearnRun/login" style="margin-left: 15px">로그인</a>
+	<%
+}else{
+	%>
+	<a href="/LearnRun/logout" style="margin-left: 15px">로그아웃</a>
+	<%	
+}
+%>
+		
 	</div>
 </div>
 

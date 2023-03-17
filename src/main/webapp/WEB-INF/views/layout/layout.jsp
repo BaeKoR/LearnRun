@@ -17,6 +17,9 @@
 <link href="resources/css/layout.css" rel="stylesheet">
 <link href="resources/css/category.css" rel="stylesheet">
 
+<!-- cookie -->
+<script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript"></script>
+
 <title>Learn Run</title>
 
 </head>
