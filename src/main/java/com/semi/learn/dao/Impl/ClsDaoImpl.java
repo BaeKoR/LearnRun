@@ -33,4 +33,9 @@ public class ClsDaoImpl implements ClsDao {
 	public List<ClsDto> bestClslist() {
 		return session.selectList(ns + "bestClslist");
 	}
+
+	@Override
+	public int uploadCls(ClsDto dto) {
+		return session.insert(ns + "writeCls", dto);
+	}
 }

@@ -12,4 +12,6 @@ public interface ClsDao {
 	List<ClsDto> recClslist(String category);
 	
 	List<ClsDto> bestClslist();
+	
+	int uploadCls(ClsDto dto);
 }
