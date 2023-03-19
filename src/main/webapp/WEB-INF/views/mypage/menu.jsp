@@ -15,19 +15,19 @@ MemberDto login = (MemberDto)session.getAttribute("login");
       
       <ul class="nav flex-column nav-pills">
         <li class="nav-item">
-          <a class="nav-link ${current == 'myCls' ? 'active' : ''}" href="/LearnRun/myCls?id=<%=login.getId()%>">수강중인 강의</a>
+          <a class="nav-link ${current == 'myCls' ? 'active' : ''}" href="/LearnRun/myCls">수강중인 강의</a>
         </li>
         <li class="nav-item">
           <a class="nav-link ${current == 'manageCls' ? 'active' : ''}" href="/LearnRun/manageCls?id=<%=login.getId()%>">개설한 강의</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'myReview' ? 'active' : ''}" href="/LearnRun/myReview?id=admin?id=<%=login.getId()%>">작성한 후기</a>
+          <a class="nav-link ${current == 'myReview' ? 'active' : ''}" href="/LearnRun/myReview?id=admin">작성한 후기</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'updateMember' ? 'active' : ''}" href="/LearnRun/pwdCheck?id=<%=login.getId()%>">내 정보 수정</a>
+          <a class="nav-link ${current == 'updateMember' ? 'active' : ''}" href="/LearnRun/pwdCheck">내 정보 수정</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'quit' ? 'active' : ''}" href="/LearnRun/quit?id=<%=login.getId()%>">회원 탈퇴</a>
+          <a class="nav-link ${current == 'quit' ? 'active' : ''}" href="/LearnRun/quit">회원 탈퇴</a>
         </li>
       </ul>
       

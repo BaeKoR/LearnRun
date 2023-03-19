@@ -113,4 +113,35 @@ public class ClsController {
 		return "redirect:/manageCls?id=" + dto.getId();
 	}
 	
+	@PostMapping(value = "updateCls")
+	public String updateCls(ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) {
+		String originalFileName = fileload.getOriginalFilename();
+		
+		if (originalFileName != null && !originalFileName.equals("")) { // 파일이 변경됨
+			String newfilename = clsUtil.getNewFileName(originalFileName);
+			
+			dto.setFilename(originalFileName);
+			dto.setNewfilename(newfilename);
+			
+			String fupload = req.getServletContext().getRealPath("/upload");
+			File file = new File(fupload + "/" + newfilename);
+			
+			try {
+				// 새로운 파일로 업로드
+				FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+				
+				// db 갱신
+				service.updateCls(dto);
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else { // 파일이 변경되지 않음
+			service.updateCls(dto);
+		}
+		
+		return "redirect:/manageCls?id=" + dto.getId();
+	}
+	
 }

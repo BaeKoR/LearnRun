@@ -1,8 +1,12 @@
+<%@page import="com.semi.learn.dto.ClsDto"%>
 <%@page import="com.semi.learn.dto.MemberDto"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
 MemberDto login = (MemberDto)session.getAttribute("login");
+ClsDto list = (ClsDto)request.getAttribute("list");
+
+String category = list.getCategory();
 %>
 
 <!DOCTYPE html>
@@ -19,35 +23,54 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 <div>
 <form action="updateCls" id="frm" method="post" enctype="multipart/form-data">
 <input type="hidden" id="id" name="id" value="<%=login.getId()%>">
+<input type="hidden" id="seq" name="seq" value="<%=list.getSeq()%>">
 
 <table>
 <col width="10"><col width="10">
 
 <tr>
 	<td>
-		<input type="text" id="title" name="title" placeholder="강의 제목" value="">
+		<input type="text" id="title" name="title" placeholder="강의 제목" value="<%=list.getTitle()%>">
 	</td>
 	<td rowspan="3">
-		<img src="" id="image" name="image"/>
+		<img src="upload/<%=list.getNewfilename()%>" id="image" name="image"/>
 	</td>
 </tr>
 <tr>
 	<td>
 		<select id="category" name="category">
 			<option>카테고리</option>
-			<option>요리</option>
-			<option>디자인</option>
+			<option <%
+			if(category.equals("요리")){
+				%>
+				selected="selected"
+				<%
+			}
+			%>>
+				요리
+			</option>
+			<option <%
+			if(category.equals("디자인")){
+				%>
+				selected="selected"
+				<%
+			}
+			%>>
+				디자인
+			</option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<input type="file" id="fileload" name="fileload"><!-- class="files" -->
+		<input type="file" id="fileload" name="fileload">
+		<input type="hidden" name="filename" value="<%=list.getFilename()%>">
+		<input type="hidden" name="newfilename" value="<%=list.getNewfilename()%>">
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-		<textarea cols="200" rows="30" id="content" name="content" placeholder="강의 내용"></textarea>
+		<textarea cols="200" rows="30" id="content" name="content" placeholder="강의 내용"><%=list.getContent()%></textarea>
 	</td>
 </tr>
 <tr>
@@ -70,10 +93,10 @@ $(document).ready(function () {
 			alert("카테고리를 선택해주세요");
 			return;
 		}
-		else if($("#fileload").val().trim() == ""){
+		/*else if($("fileload").val().trim() == ""){
 			alert("이미지 파일을 선택해주세요");
 			return;
-		}
+		}*/
 		else if($("#content").val().trim() == ""){
 			alert("내용을 입력해주세요");
 			return;

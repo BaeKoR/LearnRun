@@ -38,4 +38,9 @@ public class ClsDaoImpl implements ClsDao {
 	public int uploadCls(ClsDto dto) {
 		return session.insert(ns + "writeCls", dto);
 	}
+
+	@Override
+	public int updateCls(ClsDto dto) {
+		return session.update(ns + "updateCls", dto);
+	}
 }

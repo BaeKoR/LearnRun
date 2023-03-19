@@ -36,5 +36,11 @@ public class ClsServiceImpl implements ClsService {
 		int n = dao.uploadCls(dto);
 		return n>0?true:false;
 	}
+
+	@Override
+	public boolean updateCls(ClsDto dto) {
+		int n = dao.updateCls(dto);
+		return n>0?true:false;
+	}
 	
 }

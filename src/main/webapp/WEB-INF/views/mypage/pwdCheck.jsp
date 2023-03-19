@@ -19,7 +19,9 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 
 <h1>비밀번호 입력</h1>
 <form action="/LearnRun/updateMember" method="post">
-	<input type="password" id="pwd" name="pwd">
+	<input type="hidden" id="id" name="id" value="<%=login.getId()%>">
+	
+	<input type="password" id="pwd" name="pwd" placeholder="Passward">
 	
 	<button type="button">입력</button>
 </form>

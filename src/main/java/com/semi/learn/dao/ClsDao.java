@@ -14,4 +14,5 @@ public interface ClsDao {
 	List<ClsDto> bestClslist();
 	
 	int uploadCls(ClsDto dto);
+	int updateCls(ClsDto dto);
 }

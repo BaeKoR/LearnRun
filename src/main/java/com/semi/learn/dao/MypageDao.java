@@ -14,4 +14,10 @@ public interface MypageDao {
 	int delMember(MemberDto dto);
 	
 	List<ClsDto> clslist(String id);
+	
+	ClsDto getcls(int seq);
+	
+	MemberDto getmember(String id);
+	
+	int updateMemerAf(MemberDto dto);
 }
