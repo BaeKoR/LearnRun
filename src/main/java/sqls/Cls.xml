@@ -32,4 +32,9 @@
 	order by count(*) desc
 </select>
 
+<insert id="writeCls" parameterType="com.semi.learn.dto.ClsDto">
+	insert into cls(id, category, title, content, wdate, recommend, filename, newfilename)
+	values(#{id}, #{category}, #{title}, #{content}, now(), 0, #{filename}, #{newfilename})
+</insert>
+
 </mapper>

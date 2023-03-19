@@ -10,8 +10,8 @@ public class ClsDto implements Serializable {
 	private String content;		// 내용
 	private String wdate;		// 작성일
 	private int recommend;		// 추천여부
-	private String filename;	// 파일명
-	private String newfilename;
+	private String filename;	// 업로드파일명
+	private String newfilename;	// 저장된파일명
 
 	public ClsDto() {
 	}

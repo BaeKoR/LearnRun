@@ -30,5 +30,11 @@ public class ClsServiceImpl implements ClsService {
 	public List<ClsDto> bestClslist() {
 		return dao.bestClslist();
 	}
+
+	@Override
+	public boolean uploadCls(ClsDto dto) {
+		int n = dao.uploadCls(dto);
+		return n>0?true:false;
+	}
 	
 }

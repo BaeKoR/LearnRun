@@ -22,7 +22,6 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 	</div>
 	
 	<div class="header-right">
-		<a href="/LearnRun/myCls">마이페이지</a>
 
 <!-- 로그아웃 처리 -->		
 <%
@@ -32,6 +31,7 @@ if(login == null){
 	<%
 }else{
 	%>
+	<a href="/LearnRun/myCls">마이페이지</a>
 	<a href="/LearnRun/logout" style="margin-left: 15px">로그아웃</a>
 	<%	
 }

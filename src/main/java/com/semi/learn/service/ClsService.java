@@ -12,4 +12,6 @@ public interface ClsService {
 	List<ClsDto> recClslist(String category);
 	
 	List<ClsDto> bestClslist();
+	
+	boolean uploadCls(ClsDto dto);
 }

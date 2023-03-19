@@ -1,16 +1,25 @@
 package com.semi.learn.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.semi.learn.dto.ClsDto;
 import com.semi.learn.dto.ClsParam;
 import com.semi.learn.service.ClsService;
+import com.semi.learn.util.clsUtil;
 
 
 @Controller
@@ -71,5 +80,37 @@ public class ClsController {
 		
 		return "bestCls/bestClslist";
 	}
-
+	
+	@PostMapping(value = "writeCls")
+	public String pdsupload(ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) { // HttpServletRequest는 업로드 경로를 수정하기 위해 사용 됨
+		// filename 취득
+		String filename = fileload.getOriginalFilename(); // 원본의 파일명
+		
+		dto.setFilename(filename);
+		
+		String fupload = req.getServletContext().getRealPath("/upload");
+		
+		System.out.println("fupload: " + fupload);
+		
+		// 파일명을 충돌하지 않는 이름(Date)으로 변경
+		String newfilename = clsUtil.getNewFileName(filename);
+		
+		dto.setNewfilename(newfilename); // 변경된 파일명
+		
+		File file = new File(fupload + "/" + newfilename);
+		
+		try {
+			// 실제 파일 생성 + 기입 = 업로드
+			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+			
+			// db에 저장
+			service.uploadCls(dto);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/manageCls?id=" + dto.getId();
+	}
+	
 }

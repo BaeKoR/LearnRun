@@ -1,13 +1,28 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.semi.learn.dto.ClsDto"%>
 <%@page import="java.util.List"%>
+<%@page import="com.semi.learn.dto.MemberDto"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
+MemberDto login = (MemberDto)session.getAttribute("login");
 List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
+<!-- 강의 등록 -->
+<a href="/LearnRun/createLesson"><h1>클래스 등록</h1></a>
+
+<!-- 내 강의 출력 -->
 <div class="clslist-grid">
-	<h2 class="clslist-title">전체 클래스</h2>
+	<h2 class="clslist-title">등록한 클래스 목록</h2>
 	<ul class="clslist-ul">
 	<%
 		if(list == null || list.size() == 0){
@@ -27,7 +42,7 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 						</figure>
 						<div><%=cls.getCategory() %></div>
 						<div><%=cls.getTitle() %></div>
-						<div><%=cls.getId() %></div>
+						<div><a href="/LearnRun/updateLesson?seq=<%=cls.getSeq()%>">수정</a></div>
 					</a>
 				</li>
 				<%
@@ -36,3 +51,6 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 	%>
 	</ul>
 </div>
+
+</body>
+</html>
