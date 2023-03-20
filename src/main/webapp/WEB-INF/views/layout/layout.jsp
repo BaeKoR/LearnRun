@@ -21,13 +21,54 @@
 <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript"></script>
 
 <title>Learn Run</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Yaldevi:wght@600&display=swap');
+body {
+font-family: 'Yaldevi', sans-serif;
+}
+#menu {
+vertical-align: top;
+text-align: left;
+width: 20%; 
+min-width: 250px; 
+padding: 50px 20px;
+background-color: #F8EEE1;
+}
+#menu h2 {
+margin-bottom: 20px;
+padding-left: 16px;
 
+font-family: 'Rubik Mono One', sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+line-height: 114%;
+letter-spacing: -0.035em;
+
+color: #2E2E2E;
+}
+#menu a {
+padding: 10px 16px;
+font-family: 'Yaldevi', sans-serif;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+}
+
+#content {
+vertical-align: top;
+display: block;
+min-height: 770px;
+padding: 50px;
+}
+
+</style>
 </head>
 
 <body>
 
 <div align="center">
-<table  style="width: 100%; height: 100%; text-align: center;">
+<table style="width: 100%; height: 100%; text-align: center;">
 	<!-- header -->
 	<tr style="background-color: #F8EEE1;">
 		<td colspan="2" style="height: 10%">
@@ -37,10 +78,10 @@
 	
 	<!-- main -->
 	<tr>
-		<td align="left" valign="top" style="background-color: rgb(204, 204, 204); width: 20%">
+		<td id="menu">
 			<tiles:insertAttribute name="menu" />
 		</td>
-		<td style="height: 770px">
+		<td id="content">
 			<tiles:insertAttribute name="content" />
 		</td>
 	</tr>

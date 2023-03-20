@@ -20,4 +20,7 @@ public interface MypageService {
 	MemberDto getmember(String id);
 	
 	boolean updateMemerAf(MemberDto dto);
+	
+	List<ClsDto> getTakingCls(String id);
+	List<ClsDto> getLikeCls(String id);
 }

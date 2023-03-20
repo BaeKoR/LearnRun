@@ -49,5 +49,15 @@ public class MypageServiceImpl implements MypageService {
 		int n = dao.updateMemerAf(dto);
 		return n>0?true:false;
 	}
+	
+	@Override
+	public List<ClsDto> getTakingCls(String id) {
+		return dao.getTakingCls(id);
+	}
+
+	@Override
+	public List<ClsDto> getLikeCls(String id) {
+		return dao.getLikeCls(id);
+	}
 
 }

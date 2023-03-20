@@ -4,30 +4,33 @@
 <tilesx:useAttribute name="current" />
 
 <%
-/* 로그인 세션 가져오기 (테스트하려면 아래 href의 아이디 수정) */
+/* 로그인 세션 가져오기 */
 MemberDto login = (MemberDto)session.getAttribute("login");
 %>
 
 <div class="container">
   <div class="row">
     <div class="col">
-      <div>마이페이지</div>
+      <h2>mypage</h2>
       
       <ul class="nav flex-column nav-pills">
         <li class="nav-item">
-          <a class="nav-link ${current == 'myCls' ? 'active' : ''}" href="/LearnRun/myCls">수강중인 강의</a>
+          <a style="color: ${current == 'myCls' ? 'red':''} !important;" class="nav-link" href="/LearnRun/myCls?id=<%=login.getId()%>">수강 중인 강의</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'manageCls' ? 'active' : ''}" href="/LearnRun/manageCls?id=<%=login.getId()%>">개설한 강의</a>
+          <a style="color: ${current == 'likeCls' ? 'red':''} !important;" class="nav-link" href="/LearnRun/likeCls?id=<%=login.getId()%>">좋아요를 누른 강의</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'myReview' ? 'active' : ''}" href="/LearnRun/myReview?id=admin">작성한 후기</a>
+          <a style="color: ${current == 'manageCls' ? 'red':''} !important;" class="nav-link" href="/LearnRun/manageCls?id=<%=login.getId()%>">개설한 강의</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'updateMember' ? 'active' : ''}" href="/LearnRun/pwdCheck">내 정보 수정</a>
+          <a style="color: ${current == 'myReview' ? 'red':''} !important;" class="nav-link" href="/LearnRun/myReview?id=<%=login.getId()%>">작성한 후기</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ${current == 'quit' ? 'active' : ''}" href="/LearnRun/quit">회원 탈퇴</a>
+          <a style="color: ${current == 'updateMember' ? 'red':''} !important;" class="nav-link" href="/LearnRun/pwdCheck?id=<%=login.getId()%>">내 정보 수정</a>
+        </li>
+        <li class="nav-item">
+          <a style="color: ${current == 'quit' ? 'red':''} !important;" class="nav-link" href="/LearnRun/quit?id=<%=login.getId()%>">회원 탈퇴</a>
         </li>
       </ul>
       

@@ -32,9 +32,23 @@ public class MypageController {
 	MypageService service;
 	
 	@GetMapping("myCls")
-	public String myCls() {
+	public String myCls(Model model, String id) {
+		
+		List<ClsDto> list = service.getTakingCls(id);
+		
+		model.addAttribute("takecls", list);
 		
 		return "mypage/myCls";
+	}
+	
+	@GetMapping("likeCls")
+	public String likeCls(Model model, String id) {
+		
+		List<ClsDto> list = service.getLikeCls(id);
+		
+		model.addAttribute("likecls", list);
+		
+		return "mypage/likeCls";
 	}
 	
 	@GetMapping("manageCls")
@@ -122,7 +136,7 @@ public class MypageController {
 	}
 	
 	@GetMapping("quit")
-	public String quit() {
+	public String quit(String id) {
 		
 		return "mypage/quit";
 	}

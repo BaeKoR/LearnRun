@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Mypage">
+	
+	<select id="getTakingCls" parameterType="String" resultType="com.semi.learn.dto.ClsDto">
+		select b.seq, b.title, b.newfilename
+		from takecls a, cls b
+		where a.seq=b.seq
+		and a.id=#{id}
+		order by a.rdate desc;
+	</select>
+	
+	<select id="getLikeCls" parameterType="String" resultType="com.semi.learn.dto.ClsDto">
+		select b.seq, b.title, b.id, b.category, b.newfilename
+		from likecls a, cls b
+		where a.seq=b.seq
+		and a.id=#{id}
+		order by a.rdate desc;
+	</select>
+	
 	<select id="getMyReview" parameterType="String" resultType="map">
 		select b.seq, b.title, a.content, a.wdate
 		from review a, cls b
