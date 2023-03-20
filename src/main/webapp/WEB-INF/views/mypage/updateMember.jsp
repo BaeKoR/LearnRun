@@ -29,9 +29,9 @@ MemberDto dto = (MemberDto)request.getAttribute("dto");
 <tr>
 	<td>파일 변경</td>
 	<td>
-		<input type="file" id="fileload" name="fileload">
 		<input type="hidden" id="filename" name="filename" value="<%=dto.getFilename()%>">
 		<input type="hidden" id="newfilename" name="newfilename" value="<%=dto.getNewfilename()%>">
+		<input type="file" id="fileload" name="fileload">
 	</td>
 </tr>
 <tr>

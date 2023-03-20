@@ -43,4 +43,10 @@
 	where seq=#{seq}
 </update>
 
+<select id="getCls" parameterType="Integer" resultType="com.semi.learn.dto.ClsDto">
+	select seq, id, category, title, content, wdate, recommend, filename, newfilename
+	from cls
+	where seq=#{seq}
+</select>
+
 </mapper>

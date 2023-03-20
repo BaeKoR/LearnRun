@@ -43,4 +43,9 @@ public class ClsDaoImpl implements ClsDao {
 	public int updateCls(ClsDto dto) {
 		return session.update(ns + "updateCls", dto);
 	}
+
+	@Override
+	public ClsDto getCls(int seq) {
+		return session.selectOne(ns + "getCls", seq);
+	}
 }

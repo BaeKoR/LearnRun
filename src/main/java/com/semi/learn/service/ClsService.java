@@ -15,4 +15,6 @@ public interface ClsService {
 	
 	boolean uploadCls(ClsDto dto);
 	boolean updateCls(ClsDto dto);
+	
+	ClsDto getCls(int seq);
 }

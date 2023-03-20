@@ -42,5 +42,10 @@ public class ClsServiceImpl implements ClsService {
 		int n = dao.updateCls(dto);
 		return n>0?true:false;
 	}
+
+	@Override
+	public ClsDto getCls(int seq) {
+		return dao.getCls(seq);
+	}
 	
 }

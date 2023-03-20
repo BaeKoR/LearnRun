@@ -15,7 +15,14 @@ String category = list.getCategory();
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- jQuery, bootstrap -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+<!-- summernote css/js -->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 </head>
 <body>
@@ -63,14 +70,15 @@ String category = list.getCategory();
 </tr>
 <tr>
 	<td>
-		<input type="file" id="fileload" name="fileload">
 		<input type="hidden" name="filename" value="<%=list.getFilename()%>">
 		<input type="hidden" name="newfilename" value="<%=list.getNewfilename()%>">
+		<input type="file" id="fileload" name="fileload">
+		1MB이하의 jpg, png 확장자 파일만 적용 가능합니다
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-		<textarea cols="200" rows="30" id="content" name="content" placeholder="강의 내용"><%=list.getContent()%></textarea>
+		<textarea cols="200" rows="30" id="summernote" name="content" placeholder="강의 내용"><%=list.getContent()%></textarea>
 	</td>
 </tr>
 <tr>
@@ -96,11 +104,11 @@ $(document).ready(function () {
 		/*else if($("fileload").val().trim() == ""){
 			alert("이미지 파일을 선택해주세요");
 			return;
-		}*/
-		else if($("#content").val().trim() == ""){
+		}
+		else if($("#content").text().trim() == ""){
 			alert("내용을 입력해주세요");
 			return;
-		}
+		}*/
 		else{
 			//alert("성공");
 			$("#frm").submit();
@@ -123,7 +131,17 @@ function setImageFromFile(input, expression) {
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+</script>
 
+<script type="text/javascript">
+// 메인화면 페이지 로드 함수
+$(document).ready(function () {
+    $('#summernote').summernote({
+        placeholder: '내용을 작성하세요',
+        height: 400,
+        maxHeight: 400
+    });
+});
 </script>
 
 </body>
