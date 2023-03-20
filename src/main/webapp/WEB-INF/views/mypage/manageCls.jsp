@@ -21,9 +21,9 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 <a href="/LearnRun/createLesson"><h1>클래스 등록</h1></a>
 
 <!-- 내 강의 출력 -->
-<div class="clslist-grid">
-	<h2 class="clslist-title">등록한 클래스 목록</h2>
-	<ul class="clslist-ul">
+<div class="clslist">
+	<h2>등록한 클래스 목록</h2>
+	<ul>
 	<%
 		if(list == null || list.size() == 0){
 		%>
@@ -35,13 +35,22 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 			{
 				ClsDto cls = list.get(i);
 				%>
-				<li class="clslist-li">
+				<li>
 					<a href="/LearnRun/clsDetail?seq=<%=cls.getSeq() %>">
-						<figure class="clslist-fig">
+						<figure class="cls-fig">
 							<img src="upload/<%=cls.getNewfilename() %>" alt="클래스이미지">
 						</figure>
-						<div><%=cls.getCategory() %></div>
-						<div><%=cls.getTitle() %></div>
+						<div class="cls-tag">
+							<p class="tag-category"><%=cls.getCategory() %></p>
+							<% if(cls.getRecommend()==1) { %>
+							<p class="tag-category">추천</p>
+							<% } %>
+						</div>
+						<div class="cls-title"><%=cls.getTitle() %></div>
+						<div class="cls-id">
+							<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
+							<p><%=cls.getId() %></p>
+						</div>
 						<div><a href="/LearnRun/updateLesson?seq=<%=cls.getSeq()%>">수정</a></div>
 					</a>
 				</li>

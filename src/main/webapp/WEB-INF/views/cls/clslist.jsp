@@ -1,8 +1,10 @@
+<%@page import="com.semi.learn.dto.MemberDto"%>
 <%@page import="com.semi.learn.dto.ClsDto"%>
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
+MemberDto login = (MemberDto)session.getAttribute("login");
 List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 String category = (String)request.getAttribute("category");
 %>
@@ -19,12 +21,12 @@ if(category == "" || category == null){
 %>
 
 <div style="height: 10%;">
-<h2><%=pageTitle %></h2>
+<h1 class="cls-h1"><%=pageTitle %></h1>
 </div>
 
 <div style="height: 90%;">
-<div class="clslist-grid">
-	<ul class="clslist-ul">
+<div class="clslist">
+	<ul>
 	<%
 		if(list == null || list.size() == 0){
 		%>
@@ -36,14 +38,22 @@ if(category == "" || category == null){
 			{
 				ClsDto cls = list.get(i);
 				%>
-				<li class="clslist-li">
+				<li>
 					<a href="/LearnRun/clsDetail?seq=<%=cls.getSeq() %>">
-						<figure class="clslist-fig">
-							<img src="..." alt="클래스이미지">
+						<figure class="cls-fig">
+							<img src="upload/<%=cls.getNewfilename() %>" alt="클래스이미지">
 						</figure>
-						<div><%=cls.getCategory() %></div>
-						<div><%=cls.getTitle() %></div>
-						<div><%=cls.getId() %></div>
+						<div class="cls-tag">
+							<p class="tag-category"><%=cls.getCategory() %></p>
+							<% if(cls.getRecommend()==1) { %>
+							<p class="tag-category">추천</p>
+							<% } %>
+						</div>
+						<div class="cls-title"><%=cls.getTitle() %></div>
+						<div class="cls-id">
+							<div class="cls-profile"><img src="upload/<%=login.getNewfilename() %>" alt="클래스작성자"></div>
+							<p><%=cls.getId() %></p>
+						</div>
 					</a>
 				</li>
 				<%
