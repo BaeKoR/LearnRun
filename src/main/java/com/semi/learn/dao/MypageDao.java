@@ -20,4 +20,7 @@ public interface MypageDao {
 	MemberDto getmember(String id);
 	
 	int updateMemerAf(MemberDto dto);
+	
+	List<ClsDto> getTakingCls(String id);
+	List<ClsDto> getLikeCls(String id);
 }

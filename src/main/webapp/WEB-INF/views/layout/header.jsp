@@ -31,7 +31,7 @@ if(login == null){
 	<%
 }else{
 	%>
-	<a href="/LearnRun/myCls">마이페이지</a>
+	<a href="/LearnRun/myCls?id=<%=login.getId()%>">마이페이지</a>
 	<a href="/LearnRun/logout" style="margin-left: 15px">로그아웃</a>
 	<%	
 }

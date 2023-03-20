@@ -1,39 +1,66 @@
 @charset "UTF-8";
 
 body {
-	background-color: #3F3E3D; color: #F8EEE1;
+	background-color: #121212; 
+	color: #F8EEE1;
 }
 body > table {
-	width: 100%; height: 100%; 
+	width: 100%; 
+	height: 100%; 
 	min-width: 1200px;
 }
 
 a{
-	color: gray;
+	color: #F8EEE1;
 }
 a:hover{
 	text-decoration: none;
 	color: #F8EEE1;
 }
+hr {
+	border-color: #F8EEE180; 
+}
 pre{
 	color: #F8EEE1;
 }
 textarea {
-	margin-left: 1.5px;
-	min-width: 230px;
 	height: 57px;
+	width: 77%;	
+	min-width: 230px;
+	margin-left: 1.5px;
     border: none;
 }
 textarea:focus {
     outline: none;
 }
 .btn-light {
+	vertical-align: top;
+    height: 57px;
+    min-width: 65px;
+    width: 22%;	
+	margin-left: -4.4px; 
 	border-top-left-radius: initial; 
 	border-bottom-left-radius: initial;
-	margin-left: -4.4px; vertical-align: top;
 }
 .collapse textarea {
-	min-width: 200px;
+    min-width: 210px;
+    width: 75%;	
+}
+.qnatable {
+	width: 100%;
+}
+.qnatable td {
+	text-align: right;
+}
+.qnatable p {
+	text-align: left;
+	color: #F8EEE1;
+}
+.qnatable p:first-child {
+	color: white;
+}
+.btn-dark {
+	margin: 0 20px;
 }
 #navbar{
 	height: 50px;
@@ -44,6 +71,10 @@ textarea:focus {
 }
 #pagination {
 	text-align: center;
+	margin-bottom: 20px;
+}
+#pagination a {
+	color: gray;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
@@ -57,8 +88,11 @@ textarea:focus {
 	background-color: #F8EEE1;
 	border-color: #F8EEE1;
 }
+.list-group-item.active a {
+	color: #495057;
+}
 .list-group-item {
-	background-color: #3F3E3D;
+	background-color: #262626;
 }
 .list-group-item:first-child{
 	border-top-left-radius: initial;

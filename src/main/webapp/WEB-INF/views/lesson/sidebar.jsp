@@ -72,12 +72,12 @@ int totalPages = (Integer)request.getAttribute("totalPages");
   	  	<input type="hidden" name="les_seq" value="<%= les_seq %>" />
   	  	
   	  	<textarea name="content" style=""></textarea>
-  	  	<button type="submit" class="btn btn-light p-3" style="">작성</button>
+  	  	<button type="submit" class="btn btn-light">작성</button>
   	  </form>
   	</div>
   	
   	<!-- 작성된 목록 -->
-  	<table>
+  	<table class="qnatable">
   	  <tbody id="tbody">
 		<%
 	  	if(qnalist == null || qnalist.size() == 0) {
@@ -93,20 +93,21 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			  		%>
 			  		<tr>
 			  			<td>
-			  				<%= dto.getId() %>
-			  				<pre><%= dto.getContent() %></pre>
+			  				<p><%= dto.getId() %></p>
+			  				<p><%= dto.getContent() %></p>
 			  				
-			  				<button class="btn btn-sm" data-toggle="collapse" data-target="#ansForm<%=i%>">답글</button>
+			  				<button class="btn btn-sm btn-dark" data-toggle="collapse" data-target="#ansForm<%=i%>">답글</button>
 			  				<div class="collapse" id="ansForm<%=i%>">
 						  	  <form action="/LearnRun/writeAns" method="post">
 						  	  	<input type="hidden" name="cls_seq" value="<%= cls_seq %>" /><!-- 작성 후 다시 돌아오기 위해 -->
 						  	  	<input type="hidden" name="id" value="sua" /><!-- 현재 로그인 아이디 -->
 						  	  	<input type="hidden" name="les_seq" value="<%= les_seq %>" />
 						  	  	<input type="hidden" name="seq" value="<%= dto.getSeq() %>" />
-						  	  	<textarea name="content" style="vertical-align: middle;"></textarea>
-						  	  	<button type="submit" class="btn btn-light p-3" style="vertical-align: middle;">작성</button>
+						  	  	<textarea name="content"></textarea>
+						  	  	<button type="button" class="btn btn-light">작성</button>
 						  	  </form>
 						  	</div>
+						  	<hr/>
 			  			</td>
 			  		</tr>
 			  		<%
@@ -114,11 +115,9 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 		  			%>
 			  		<tr>
 			  			<td>
-			  				<div style='display: inline-block; vertical-align: top;'>↳ </div>
-			  				<div style='display: inline-block;'>
-				  				<%= dto.getId() %>
-				  				<pre><%= dto.getContent() %></pre>
-			  				</div>
+			  				<p>↳ <%= dto.getId() %></p>
+			  				<p style="margin-left: 15px;"><%= dto.getContent() %></p>
+			  				<hr/>
 			  			</td>
 			  		</tr>
 			  		<%
@@ -135,11 +134,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 	for(int i = 0; i < totalPages; i++) {
 		if(i == pageNumber) {	// 현재 페이지는 클릭 안되게끔
 			%>
-			<strong><%= i + 1 %></strong>
+			<strong> <%= i + 1 %> </strong>
 			<%
 		} else {
 			%>
-			<a href="#" onclick="goPage(<%= i %>)"><%= i + 1 %></a>
+			<a href="#" onclick="goPage(<%= i %>)"> <%= i + 1 %> </a>
 			<%
 		}
 	}
@@ -157,28 +156,32 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			type:"get",
 			data:{"les_seq":<%= les_seq %>, "pageNumber": pn},
 			success:function(list) {
+				
 				/* Q&Q 리스트 페이지에 맞게 바꾸기 */
 				$('#tbody').html("");
 				$.each(list, function(i, dto) {
+					
 					let str = "";
 					if(dto.step !== 0) {	/* 답글일 때 */
-						str += "<tr><td><div style='display: inline-block; vertical-align: top;'>↳ </div>"
-							+ "<div style='display: inline-block;'>" + dto.id
-							+ "<pre>" + dto.content + "</pre>"
-							+ "</div></td></tr>";
+						str = "<tr><td>"
+							+ "<p>↳ " + dto.id + "</p>"
+							+ "<p style='margin-left: 15px;'>" + dto.content + "</p>"
+							+ "<hr/></td></tr>";
+							
 					} else {				/* 질문일 때 */
-						str = "<tr><td>" + dto.id
-							+ "<pre>" + dto.content + "</pre>"
-							+ '<button class="btn btn-sm" data-toggle="collapse" data-target="#ansForm' + i + '">답글</button>'
-			  				+ '<div class="collapse" id="ansForm' + i + '">'
+						str = "<tr><td><p>" + dto.id + "</p>"
+							+ "<p>" + dto.content + "</p>"
+							+ '<button class="btn btn-sm btn-dark" data-toggle="collapse" data-target="#ansForm' + i + '">답글</button>'
+			  				
+							+ '<div class="collapse" id="ansForm' + i + '">'
 						  	+ '<form action="/LearnRun/writeAns" method="post">'
 						  	+ '<input type="hidden" name="cls_seq" value="<%= cls_seq %>" />'
 						  	+ '<input type="hidden" name="id" value="sua" />'
 						  	+ '<input type="hidden" name="les_seq" value="<%= les_seq %>" />'
 						  	+ '<input type="hidden" name="seq" value="' + dto.seq + '" />'
-						  	+ '<textarea name="content" style="vertical-align: middle;"></textarea>'
-						  	+ '<button type="submit" class="btn btn-light p-3" style="vertical-align: middle;">작성</button>'
-						  	+ '</form></div></td></tr>';
+						  	+ '<textarea name="content"></textarea>'
+						  	+ '<button type="button" class="btn btn-light">작성</button>'
+						  	+ '</form></div>' + '<hr/></td></tr>';
 					}
 					$('#tbody').append(str);
 				});
@@ -188,11 +191,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 				let str = "";
 				for(let i = 0; i < <%=totalPages%>; i++) {
 					if(i == pn) {
-						str = "<strong>" + (i+1) + "</strong>";
+						str = "<strong> " + (i+1) + " </strong>";
 					} else {
 						str = "<a href='#' onclick='goPage(" + i 
-								+ ")' style='font-weight: bold; text-decoration: none;'>"
-								+ (i+1) + "</a>";
+								+ ")' style='font-weight: bold; text-decoration: none;'> "
+								+ (i+1) + " </a>";
 					}
 					$('#pagination').append(str);
 				}
@@ -202,4 +205,15 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			}
 		});
 	}
+	
+	$(document).ready(function () {
+		$("form button").click(function () {
+			if($(this).prev().val().trim() == ""){
+				alert("내용을 입력해주세요");
+				return;
+			} else {
+				$(this).parent().submit();
+			}
+		});
+	});
 </script>

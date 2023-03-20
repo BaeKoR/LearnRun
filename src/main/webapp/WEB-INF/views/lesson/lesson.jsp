@@ -30,8 +30,8 @@
 	
 	<!-- 강의 제목, 내용 -->
 	<div>
-		<div><%= dto.getTitle() %></div><hr/>
-		<pre><%= dto.getContent() %></pre><br/>
+		<p style="margin-left: 30px;"><%= dto.getTitle() %></p><hr/>
+		<p style="margin-left: 30px;"><%= dto.getContent() %></p><br/>
 	</div>
 	
 	

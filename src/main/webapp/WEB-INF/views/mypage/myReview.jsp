@@ -5,12 +5,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<style>
+#myReview-container h3 {
+	text-align: left; 
+	margin-bottom: 30px;
+	font-weight: 600;
+}
+#myReview-container .card-body {
+	padding: 10px 20px;
+}
+#card-list>div {
+	text-align: left;
+}
+#card-list>.card {
+	display: none; 
+	width: 800px;
+	float: left;
+}
+#load {
+	width: 800px; float: left;
+}
+</style>
 
 <% 
 List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute("myReview");
 %>
+<div id="myReview-container">
 <h3>작성한 후기</h3>
-<div>
+<div id="card-list">
 	<% 
 	if(list == null || list.size() == 0) {
 		%>
@@ -20,7 +42,7 @@ List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute
 		for(int i = 0; i < list.size(); i++) {
 			Map<String, Object> map = list.get(i);
 		%>
-		<div class="card" style="display: none; width: 800px;float: left;">
+		<div class="card">
 			<a href="LearnRun/cls?seq=<%=map.get("seq")%>"><!-- 클래스 상세페이지로 -->
 				<div class="card-body">
 					<div><%= map.get("title") %></div>
@@ -33,17 +55,21 @@ List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute
 		}
 	}
 	%>
-	<button id="load" style="width: 800px; float: left;">+ 더 보기</button>
+	<button id="load">+ 더 보기</button>
 </div>
-
+</div>
 
 <script>
 $(function(){
-    $(".card").slice(0, 1).show();			// 초기갯수
+	if("<%= list %>" === "[]") {
+		$("#load").hide();
+	}
+	
+    $(".card").slice(0, 3).show();			// 초기갯수
     
     $("#load").click(function(e){			// 클릭 시 more
         e.preventDefault();
-        $(".card:hidden").slice(0, 1).show(); // 클릭 시 more 갯수 지정
+        $(".card:hidden").slice(0, 3).show(); // 클릭 시 more 갯수 지정
         
         if($(".card:hidden").length == 0){ 	// 컨텐츠 남아있는지 확인
             alert("게시물의 끝입니다."); 		// 컨텐츠 없을 시 alert 창 띄우기 
