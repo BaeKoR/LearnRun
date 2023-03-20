@@ -34,9 +34,11 @@ public class ClsController {
 		
 		ClsParam param = new ClsParam(null, null, 0, 0, 0);
 		
-		List<ClsDto> list = service.clslist(param);
+		List<ClsDto> clslist = service.clslist(param);
+		List<ClsDto> bestlist = service.bestClslist();
 		
-		model.addAttribute("clslist", list);
+		model.addAttribute("clslist", clslist);
+		model.addAttribute("bestlist", bestlist);
 		
 		return "mainpage";
 	}
@@ -66,7 +68,7 @@ public class ClsController {
 		model.addAttribute("cookReclist", cookReclist);
 		model.addAttribute("designReclist", designReclist);
 		
-		return "recCls/recClslist";
+		return "defaultCls/recClslist";
 	}
 	
 	// 인기 클래스 목록
@@ -78,7 +80,7 @@ public class ClsController {
 		
 		model.addAttribute("bestClslist", list);
 		
-		return "bestCls/bestClslist";
+		return "defaultCls/bestClslist";
 	}
 	
 	@PostMapping(value = "writeCls")
@@ -198,6 +200,6 @@ public class ClsController {
 		
 		model.addAttribute("list", list);
 		
-		return "cls/clsDetail";
+		return "defaultCls/clsDetail";
 	}
 }
