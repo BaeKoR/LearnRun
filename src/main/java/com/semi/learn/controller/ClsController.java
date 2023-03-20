@@ -82,66 +82,122 @@ public class ClsController {
 	}
 	
 	@PostMapping(value = "writeCls")
-	public String pdsupload(ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) { // HttpServletRequest는 업로드 경로를 수정하기 위해 사용 됨
+	public String pdsupload(Model model, ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) throws IOException { // HttpServletRequest는 업로드 경로를 수정하기 위해 사용 됨
 		// filename 취득
 		String filename = fileload.getOriginalFilename(); // 원본의 파일명
 		
-		dto.setFilename(filename);
+		String filecheck = filename.substring(filename.indexOf('.')); // 확장자 제한
+		int filesize = fileload.getBytes().length; // 파일크기 제한
+		String notimage = "";
+		String toobig = "";
 		
-		String fupload = req.getServletContext().getRealPath("/upload");
-		
-		System.out.println("fupload: " + fupload);
-		
-		// 파일명을 충돌하지 않는 이름(Date)으로 변경
-		String newfilename = clsUtil.getNewFileName(filename);
-		
-		dto.setNewfilename(newfilename); // 변경된 파일명
-		
-		File file = new File(fupload + "/" + newfilename);
-		
-		try {
-			// 실제 파일 생성 + 기입 = 업로드
-			FileUtils.writeByteArrayToFile(file, fileload.getBytes());
-			
-			// db에 저장
-			service.uploadCls(dto);
+		if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
+			if (filesize < 1048577) { // 1MB
+				dto.setFilename(filename);
+				
+				String fupload = req.getServletContext().getRealPath("/upload");
+				
+				System.out.println("fupload: " + fupload);
+				
+				// 파일명을 충돌하지 않는 이름(Date)으로 변경
+				String newfilename = clsUtil.getNewFileName(filename);
+				
+				dto.setNewfilename(newfilename); // 변경된 파일명
+				
+				File file = new File(fupload + "/" + newfilename);
+				
+				try {
+					// 실제 파일 생성 + 기입 = 업로드
+					FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+					
+					// db에 저장
+					service.uploadCls(dto);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				toobig = "toobig";
+				
+				model.addAttribute("toobig", toobig);
+				
+				return "message";
+			}
 		}
-		catch (IOException e) {
-			e.printStackTrace();
+		else {
+			notimage = "notimage";
+			
+			model.addAttribute("notimage", notimage);
+			
+			return "message";
 		}
 		
 		return "redirect:/manageCls?id=" + dto.getId();
 	}
 	
 	@PostMapping(value = "updateCls")
-	public String updateCls(ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) {
+	public String updateCls(Model model, ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) throws IOException {
 		String originalFileName = fileload.getOriginalFilename();
 		
-		if (originalFileName != null && !originalFileName.equals("")) { // 파일이 변경됨
-			String newfilename = clsUtil.getNewFileName(originalFileName);
-			
-			dto.setFilename(originalFileName);
-			dto.setNewfilename(newfilename);
-			
-			String fupload = req.getServletContext().getRealPath("/upload");
-			File file = new File(fupload + "/" + newfilename);
-			
-			try {
-				// 새로운 파일로 업로드
-				FileUtils.writeByteArrayToFile(file, fileload.getBytes());
-				
-				// db 갱신
-				service.updateCls(dto);
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		else { // 파일이 변경되지 않음
-			service.updateCls(dto);
-		}
+		String filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
+		int filesize = fileload.getBytes().length; // 파일크기 제한
+		String clsnotimage = "";
+		String clstoobig = "";
 		
+		if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
+			if (filesize < 1048577) { // 1MB
+				if (originalFileName != null && !originalFileName.equals("")) { // 파일이 변경됨
+					String newfilename = clsUtil.getNewFileName(originalFileName);
+					
+					dto.setFilename(originalFileName);
+					dto.setNewfilename(newfilename);
+					
+					String fupload = req.getServletContext().getRealPath("/upload");
+					File file = new File(fupload + "/" + newfilename);
+					
+					try {
+						// 새로운 파일로 업로드
+						FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+						
+						// db 갱신
+						service.updateCls(dto);
+					}
+					catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				else { // 파일이 변경되지 않음
+					service.updateCls(dto);
+				}
+			}
+			else {
+				clstoobig = "clstoobig";
+					
+				model.addAttribute("clstoobig", clstoobig);
+				model.addAttribute("seq", dto.getSeq());
+				
+				return "message";
+			}
+		}
+		else {
+			clsnotimage = "clsnotimage";
+				
+			model.addAttribute("clsnotimage", clsnotimage);
+			model.addAttribute("seq", dto.getSeq());
+			
+			return "message";
+		}
+			
 		return "redirect:/manageCls?id=" + dto.getId();
 	}
 	
+	@GetMapping(value = "clsDetail")
+	public String clsDetail(Model model, int seq) {
+		ClsDto list = service.getCls(seq);
+		
+		model.addAttribute("list", list);
+		
+		return "cls/clsDetail";
+	}
 }

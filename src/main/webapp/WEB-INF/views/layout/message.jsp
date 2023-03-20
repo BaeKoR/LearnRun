@@ -69,3 +69,84 @@ if(loginmsg != null && !loginmsg.equals("")){
 	
 }
 %>
+
+<%
+String notimage = (String)request.getAttribute("notimage");
+if(notimage != null && !notimage.equals(""))
+{
+	%>
+	<script type="text/javascript">
+	alert("jpg, png 확장자 파일만 적용 가능합니다");
+	location.href="createLesson";
+	</script>
+	<%
+}
+
+String toobig = (String)request.getAttribute("toobig");
+if(toobig != null && !toobig.equals("")) {
+	%>
+	<script type="text/javascript">
+	alert("1MB이하 파일만 적용 가능합니다");
+	location.href="createLesson";
+	</script>
+	<%
+}
+
+String clsnotimage = (String)request.getAttribute("clsnotimage");
+if(clsnotimage != null && !clsnotimage.equals(""))
+{
+	int seq = (Integer)request.getAttribute("seq");
+	
+	%>
+	<script type="text/javascript">
+	alert("jpg, png 확장자 파일만 적용 가능합니다");
+	location.href="updateLesson?seq=" + <%=seq%>;
+	</script>
+	<%
+}
+
+String clstoobig = (String)request.getAttribute("clstoobig");
+if(clstoobig != null && !clstoobig.equals("")) {
+	int seq = (Integer)request.getAttribute("seq");
+	
+	%>
+	<script type="text/javascript">
+	alert("1MB이하 파일만 적용 가능합니다");
+	location.href="updateLesson?seq=" + <%=seq%>;
+	</script>
+	<%
+}
+
+String profilenotimage = (String)request.getAttribute("profilenotimage");
+if(profilenotimage != null && !profilenotimage.equals("")){
+	String id = (String)request.getAttribute("id");
+	
+	%>
+	<script type="text/javascript">
+	alert("jpg, png 확장자 파일만 적용 가능합니다");
+	location.href="pwdCheck";
+	</script>
+	<%
+}
+
+String profiletoobig = (String)request.getAttribute("profiletoobig");
+if(profiletoobig != null && !profiletoobig.equals("")) {
+	String id = (String)request.getAttribute("id");
+	
+	%>
+	<script type="text/javascript">
+	alert("1MB이하 파일만 적용 가능합니다");
+	location.href="pwdCheck";
+	</script>
+	<%
+}
+%>
+
+
+
+
+
+
+
+
+

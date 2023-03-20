@@ -15,4 +15,6 @@ public interface ClsDao {
 	
 	int uploadCls(ClsDto dto);
 	int updateCls(ClsDto dto);
+	
+	ClsDto getCls(int seq);
 }
