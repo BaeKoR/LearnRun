@@ -194,12 +194,5 @@ public class ClsController {
 		return "redirect:/manageCls?id=" + dto.getId();
 	}
 	
-	@GetMapping(value = "clsDetail")
-	public String clsDetail(Model model, int seq) {
-		ClsDto list = service.getCls(seq);
-		
-		model.addAttribute("list", list);
-		
-		return "defaultCls/clsDetail";
-	}
+	
 }

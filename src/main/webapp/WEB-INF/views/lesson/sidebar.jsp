@@ -1,3 +1,4 @@
+<%@page import="com.semi.learn.dto.MemberDto"%>
 <%@page import="com.semi.learn.dto.QnaDto"%>
 <%@page import="com.semi.learn.dto.LessonDto"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,8 @@
     pageEncoding="UTF-8"%>
 
 <%
+MemberDto login = (MemberDto)session.getAttribute("login");
+
 List<LessonDto> list = (List<LessonDto>)request.getAttribute("list");
 int cls_seq = (Integer)request.getAttribute("cls_seq");
 int les_seq = (Integer)request.getAttribute("les_seq");
@@ -18,12 +21,12 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 <!-- 탭 -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-  <li class="nav-item" style="width: 50%; text-align: center;">
+  <li class="nav-item">
     <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">
     	강의목차
     </a>
   </li>
-  <li class="nav-item" style="width: 50%; text-align: center;">
+  <li class="nav-item">
     <a class="nav-link" id="qna-tab" data-toggle="tab" href="#qna" role="tab" aria-controls="qna" aria-selected="false">
     	Q&A
     </a>
@@ -68,11 +71,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
   	<div style="width: 100%;">
   	  <form action="/LearnRun/writeQue" method="post">
   	  	<input type="hidden" name="cls_seq" value="<%= cls_seq %>" /><!-- 작성 후 다시 돌아오기 위해 -->
-  	  	<input type="hidden" name="id" value="sua" /><!-- 현재 로그인 아이디 -->
+  	  	<input type="hidden" name="id" value="<%= login.getId() %>" />
   	  	<input type="hidden" name="les_seq" value="<%= les_seq %>" />
   	  	
-  	  	<textarea name="content" style=""></textarea>
-  	  	<button type="submit" class="btn btn-light">작성</button>
+  	  	<textarea name="content"></textarea>
+  	  	<button type="button" class="btn btn-light">작성</button>
   	  </form>
   	</div>
   	
@@ -96,11 +99,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			  				<p><%= dto.getId() %></p>
 			  				<p><%= dto.getContent() %></p>
 			  				
-			  				<button class="btn btn-sm btn-dark" data-toggle="collapse" data-target="#ansForm<%=i%>">답글</button>
-			  				<div class="collapse" id="ansForm<%=i%>">
+			  				<button class="btn btn-sm btn-dark toggle">답글</button>
+			  				<div class="collapse">
 						  	  <form action="/LearnRun/writeAns" method="post">
 						  	  	<input type="hidden" name="cls_seq" value="<%= cls_seq %>" /><!-- 작성 후 다시 돌아오기 위해 -->
-						  	  	<input type="hidden" name="id" value="sua" /><!-- 현재 로그인 아이디 -->
+						  	  	<input type="hidden" name="id" value="<%= login.getId() %>" /><!-- 현재 로그인 아이디 -->
 						  	  	<input type="hidden" name="les_seq" value="<%= les_seq %>" />
 						  	  	<input type="hidden" name="seq" value="<%= dto.getSeq() %>" />
 						  	  	<textarea name="content"></textarea>
@@ -171,12 +174,12 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 					} else {				/* 질문일 때 */
 						str = "<tr><td><p>" + dto.id + "</p>"
 							+ "<p>" + dto.content + "</p>"
-							+ '<button class="btn btn-sm btn-dark" data-toggle="collapse" data-target="#ansForm' + i + '">답글</button>'
+							+ '<button class="btn btn-sm btn-dark toggle">답글</button>'
 			  				
-							+ '<div class="collapse" id="ansForm' + i + '">'
+							+ '<div class="collapse">'
 						  	+ '<form action="/LearnRun/writeAns" method="post">'
 						  	+ '<input type="hidden" name="cls_seq" value="<%= cls_seq %>" />'
-						  	+ '<input type="hidden" name="id" value="sua" />'
+						  	+ '<input type="hidden" name="id" value="<%= login.getId() %>" />'
 						  	+ '<input type="hidden" name="les_seq" value="<%= les_seq %>" />'
 						  	+ '<input type="hidden" name="seq" value="' + dto.seq + '" />'
 						  	+ '<textarea name="content"></textarea>'
@@ -194,11 +197,16 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 						str = "<strong> " + (i+1) + " </strong>";
 					} else {
 						str = "<a href='#' onclick='goPage(" + i 
-								+ ")' style='font-weight: bold; text-decoration: none;'> "
+								+ ")' style='font-weight: bold;'> "
 								+ (i+1) + " </a>";
 					}
 					$('#pagination').append(str);
 				}
+				
+				/* 답글 작성 토글 */
+				$('.toggle').click(function(){
+					$(this).next().fadeToggle('fast', 'linear');
+				});
 			},
 			error:function() {
 				alert('error');
@@ -207,6 +215,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 	}
 	
 	$(document).ready(function () {
+		/* 댓글, 답글 빈칸 검사 */
 		$("form button").click(function () {
 			if($(this).prev().val().trim() == ""){
 				alert("내용을 입력해주세요");
@@ -214,6 +223,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			} else {
 				$(this).parent().submit();
 			}
+		});
+		
+		/* 답글 작성 토글 */
+		$('.toggle').click(function(){
+			$(this).next().fadeToggle('fast', 'linear');
 		});
 	});
 </script>

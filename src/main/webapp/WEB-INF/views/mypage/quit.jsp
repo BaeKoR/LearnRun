@@ -58,6 +58,19 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 	<form action="quitAf" method="post">
 		<input type="hidden" name="id" value="<%= login.getId() %>" />
 		<input type="password" name="pwd" class="form-control" autocomplete="off" placeholder="비밀번호 입력"/>
-		<input type="submit" value="탈퇴하기" class="btn btn-secondary"/>
+		<button type="button" class="btn btn-secondary">탈퇴하기</button>
 	</form>
 </div>
+
+<script>
+$(document).ready(function () {
+	$("form button").click(function () {
+		if($(this).prev().val().trim() == ""){
+			alert("비밀번호를 입력해주세요");
+			return;
+		} else {
+			$(this).parent().submit();
+		}
+	});
+});
+</script>

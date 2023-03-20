@@ -11,6 +11,7 @@ body > table {
 }
 
 a{
+	text-decoration: none;
 	color: #F8EEE1;
 }
 a:hover{
@@ -49,6 +50,9 @@ textarea:focus {
 .qnatable {
 	width: 100%;
 }
+.qnatable tr td{
+	padding-left: 20px;
+}
 .qnatable td {
 	text-align: right;
 }
@@ -60,14 +64,16 @@ textarea:focus {
 	color: white;
 }
 .btn-dark {
-	margin: 0 20px;
+	margin: 0 20px 5px 20px;
 }
 #navbar{
 	height: 50px;
 	border-bottom: 1px solid #F8EEE180;
 }
-#tbody tr td{
-	padding-left: 20px;
+#navbar img {
+	width: 20px; 
+	vertical-align: text-bottom; 
+	margin: 0 10px;
 }
 #pagination {
 	text-align: center;
@@ -83,6 +89,9 @@ textarea:focus {
 }
 .nav-tabs .nav-link:hover {
 	border-color: #F8EEE1;
+}
+.nav-item {
+	width: 50%; text-align: center;
 }
 .list-group-item.active {
 	background-color: #F8EEE1;

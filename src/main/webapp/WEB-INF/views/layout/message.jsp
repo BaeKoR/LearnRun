@@ -1,7 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+<!-- 후기 작성 메세지 -->
+<%
+String review = (String)request.getAttribute("review");
+if(review != null && !review.equals("")) {
+	int seq = (Integer)request.getAttribute("seq");
+	if(review.equals("OK")) {
+		%>
+		<script type="text/javascript">
+			location.href = "/LearnRun/clsDetail?seq=" + <%=seq%>;
+		</script>
+		<%
+	} else {
+		%>
+		<script type="text/javascript">
+			alert("다시 시도해주세요.");
+			location.href = "/LearnRun/clsDetail?seq=" + <%=seq%>;
+		</script>
+		<%
+	}
+}
+%>
+
+<!-- 회원탈퇴 메세지 -->    
 <%
 String quit = (String)request.getAttribute("quit");
 if(quit != null && !quit.equals("")) {

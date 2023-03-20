@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Detail">
+	
+	<select id="getCls" parameterType="Integer" resultType="com.semi.learn.dto.ClsDto">
+		select seq, id, category, title, content, wdate, recommend, filename, newfilename
+		from cls
+		where seq=#{seq}
+	</select>
+	
+	<select id="getReview" parameterType="com.semi.learn.dto.ReviewParam" resultType="map">
+		select a.cls_seq, a.id, a.content, a.wdate, b.newfilename
+		from (select row_number()over(order by wdate desc) rnum,
+			cls_seq, id, content, wdate
+			from review
+			where cls_seq=#{cls_seq}
+			order by wdate desc) a,
+			member b
+		where a.id=b.id
+		and rnum between ${start} and ${end}
+	</select>
+	
+	<select id="countReview" parameterType="Integer" resultType="Integer">
+		select ifnull(count(*), 0)
+		from review
+		where cls_seq=#{cls_seq}
+	</select>
+	
+	<select id="checkTaking" parameterType="com.semi.learn.dto.ClsDto" resultType="Integer">
+		select ifnull(count(*), 0)
+		from takecls
+		where id=#{id} and seq=#{seq}
+	</select>
+	
+	<select id="checkLiking" parameterType="com.semi.learn.dto.ClsDto" resultType="Integer">
+		select ifnull(count(*), 0)
+		from likecls
+		where id=#{id} and seq=#{seq}
+	</select>
+	
+	<insert id="writeReview" parameterType="com.semi.learn.dto.ReviewDto">
+		insert into review(id, cls_seq, content, wdate)
+		values(#{id}, #{cls_seq}, #{content}, now())
+	</insert>
+	
+	<update id="updateReview" parameterType="com.semi.learn.dto.ReviewDto">
+		update review
+		set content=#{content}
+		where id=#{id} and seq=#{seq}
+	</update>
+	
+	<insert id="takeCls" parameterType="com.semi.learn.dto.ClsDto">
+		insert into takecls
+		values(#{id}, #{seq}, now())
+	</insert>
+	
+	<insert id="likeCls" parameterType="com.semi.learn.dto.ClsDto">
+		insert into likecls
+		values(#{id}, #{seq}, now())
+	</insert>
+	
+	<delete id="notTakeCls" parameterType="com.semi.learn.dto.ClsDto">
+		delete from takecls
+		where id=#{id} and seq=#{seq}
+	</delete>
+	
+	<delete id="notLikeCls" parameterType="com.semi.learn.dto.ClsDto">
+		delete from likecls
+		where id=#{id} and seq=#{seq}
+	</delete>
+</mapper>

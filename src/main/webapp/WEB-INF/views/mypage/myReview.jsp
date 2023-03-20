@@ -1,3 +1,5 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="com.semi.learn.util.Utility"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.semi.learn.dto.ClsDto"%>
@@ -22,6 +24,17 @@
 	width: 800px;
 	float: left;
 }
+.card p {
+	text-indent: -15px;
+	margin: 10px 0 10px 15px;
+	word-break: keep-all;
+}
+.card-body>span:first-child {
+	font-weight: 600;
+}
+.card-body>span:first-child {
+	color: #ababab; font-size: 0.9rem;
+}
 #load {
 	width: 800px; float: left;
 }
@@ -45,9 +58,9 @@ List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute
 		<div class="card">
 			<a href="LearnRun/cls?seq=<%=map.get("seq")%>"><!-- 클래스 상세페이지로 -->
 				<div class="card-body">
-					<div><%= map.get("title") %></div>
-					<pre>↳ <%= map.get("content") %></pre>
-					<div class="text-muted"><%= map.get("wdate") %></div>
+					<span><%= map.get("title") %></span>&nbsp;&nbsp;
+					<span><%= Utility.dateFormat((Timestamp)map.get("wdate")) %> 작성</span>
+					<p>↳ <%= map.get("content") %></p>
 				</div>
 			</a>
 		</div>

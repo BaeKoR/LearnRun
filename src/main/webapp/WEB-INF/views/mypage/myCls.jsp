@@ -7,12 +7,14 @@
 <style>
 #myCls-container h3 {
 	text-align: left;
+	margin-left: 205px;
 	margin-bottom: 30px;
 	font-weight: 600;
     font-size: 28px;
 }
 #myCls-container button {
-	width: 230px;
+	width: 270px;
+	background-color: black;
 }
 </style>
 
@@ -36,7 +38,7 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("takecls");
 			{
 				ClsDto cls = list.get(i);
 				%>
-				<li">
+				<li>
 					<a href="/LearnRun/clsDetail?seq=<%= cls.getSeq() %>">
 						<figure class="cls-fig">
 							<img src="upload/<%=cls.getNewfilename() %>" alt="클래스이미지">
@@ -44,7 +46,7 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("takecls");
 						<div class="cls-title"><%=cls.getTitle() %></div>
 					</a>
 					<div style="text-align: center; margin: 10px 0;">
-					<button class="btn btn-secondary" onclick="goLesson(<%= cls.getSeq() %>)">강의 듣기</button>
+						<button class="btn btn-dark" onclick="goLesson(<%= cls.getSeq() %>)">강의 듣기</button>
 					</div>
 				</li>
 				<%

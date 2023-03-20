@@ -10,7 +10,7 @@ String title = (String)request.getAttribute("title");
 %>
 <div>
 	<a href="/LearnRun/myCls?id=<%=login.getId()%>">
-		<img src="/LearnRun/resources/images/backarrow.png" alt="back" style="width: 20px;"/>
+		<img src="/LearnRun/resources/images/backarrow.png" alt="나가기" />
 	</a>
 	<span><%= title %></span>
 </div>
