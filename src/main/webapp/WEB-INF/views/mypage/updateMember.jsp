@@ -1,4 +1,10 @@
+<%@page import="com.semi.learn.dto.MemberDto"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+MemberDto login = (MemberDto)session.getAttribute("login");
+MemberDto dto = (MemberDto)request.getAttribute("dto");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -10,107 +16,60 @@
 
 <h1>내 정보 수정</h1>
 <div align="center" style="background-color: white;">
-
-<form action="" method="post" id="regiFrm">
-<!-- <form id="regiFrm"> -->
+<form action="updateMemberAf" method="post" id="regiFrm" enctype="multipart/form-data">
+<input type="hidden" id="id" name="id" value="<%=login.getId()%>">
 
 <table border="1">
 <tr>
+	<td>프로필 이미지</td>
+	<td>
+		<img alt="" src="upload/<%=dto.getNewfilename()%>" id="image" name="image">
+	</td>
+</tr>
+<tr>
+	<td>파일 변경</td>
+	<td>
+		<input type="file" id="fileload" name="fileload">
+		<input type="hidden" id="filename" name="filename" value="<%=dto.getFilename()%>">
+		<input type="hidden" id="newfilename" name="newfilename" value="<%=dto.getNewfilename()%>">
+	</td>
+</tr>
+<tr>
 	<td>패스워드</td>
 	<td>
-		<input type="text" name="pwd" id="pwd" size="20">
+		<input type="text" name="pwd" id="pwd" size="20" value="<%=dto.getPwd()%>">
 	</td>
 </tr>
 <tr>
 	<td>패스워드확인</td>
 	<td>
-		<input type="text" id="pwdCheck" name="pwdCheck" size="20"><br>
+		<input type="text" id="pwdCheck" name="pwdCheck" size="20" value="<%=dto.getPwd()%>"><br>
 		<p id="pwdCheckWrite" style="font-size: 8px"></p>	<!-- 비밀번호를 확인해주십시오 입력칸 -->
 	</td>
 </tr>
-
 <tr>
-	<td>이메일</td>
+	<td>이름</td>
 	<td>
-		<input type="text" name="email" id="email" size="20">
-		<button type="button" id="mailCheckBtn">인증</button><br>
-		<input type="text" id="mailCertiNum" name="mailCertiNum" placeholder="인증번호를 입력하세요">
-		<button type="button" id="mailKeyCheckBtn">인증번호확인</button><br>
-		<p id="emailCheckWrite" style="font-size: 8px"></p>		<!-- 인증번호를 확인해주세요 -->
+		<input type="text" name="name" id="name" size="20" value="<%=dto.getName()%>">
 	</td>
 </tr>
-
 <tr>
 	<td>전화번호</td>
 	<td>
-		<input type="text" name="phone" id="phone" size="20">
+		<input type="text" name="phone" id="phone" size="20" value="<%=dto.getPhone()%>">
 	</td>
 </tr>
-
 <tr>
 	<td colspan="2" align="center">
 		<input type="submit" value="수정">		
 	</td>
 </tr>
 </table>
-
 </form>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	
-$("#mailCertiNum").hide();
-$("#mailKeyCheckBtn").hide();
-
-let emailVerified = false;	// 이메일 인증완료했는지 여부
-
-//이메일 인증메일 발송
-$("#mailCheckBtn").click(function() {
-	// 이메일 중복검사
-	$.ajax({
-		type:"get",
-		url:"emailCheck",
-		data:{ "email":$("#email").val()},
-		success:function(msg){
-			if(msg == "YES"){
-				alert('이미 가입된 이메일입니다');
-			}else{			// 가입되어있는 메일이 아닐때만
-				// 인증번호 입력칸 보이기
-				$("#mailCertiNum").show();
-				$("#mailKeyCheckBtn").show();
-				
-				// 이메일 인증 발송
-				$.ajax({
-					type:"get",
-					url:"emailSend",
-					data:{ "email":$("#email").val(), "mail_key":$("mailCertiNum").val()},
-					success:function(mailkey){					
-						// alert(mailkey);
-						alert('인증메일이 발송되었습니다');							
-						
-						$("#mailKeyCheckBtn").on('click', function () {
-							if($("#mailCertiNum").val() == mailkey){
-								$("#emailCheckWrite").text("인증되었습니다");
-								emailVerified = true;		// 인증완료
-							}else{
-								$("#emailCheckWrite").text("인증번호를 확인해주십시오");
-								$("#mailCertiNum").val("");
-								emailVerified = false;
-							}
-						});
-					},
-					error:function(){
-						alert('이메일을 입력해주십시오');
-					}
-				});
-			}	// 가입안된 이메일일때 끝					
-		}, //success 끝
-			error:function(){
-				alert("error");
-			}			
-	}); // 이메일중복 ajax 끝
-});		
 
 // 비밀번호 확인
 $("#pwdCheck").on('keyup', function() {
@@ -138,30 +97,32 @@ $("#pwdCheckWrite").text("");
 	
 // form submit취소 검사
 $("#regiFrm").submit(function(event) {
-	if (!idCheck) { 				// id 중복검사가 완료되지 않은 경우
-		alert("아이디 중복검사를 완료해주십시오.");
-		event.preventDefault(); 	// submit 이벤트 취소
-		
-	} else if (!emailVerified){		// 이메일 인증이 완료되지 않은 경우	
-		alert("이메일 인증을 완료해주십시오.");
-		event.preventDefault();	// submit 이벤트 취소
-		
-		// 빈필드 검사
-	}else if ($("#id").val().trim() == "" || $("#pwd").val().trim() == "" || 
-			$("#name").val().trim() == "" || $("#email").val().trim() == "" || 
-			$("#phone").val().trim() == "" || $("#mailCertiNum").val().trim() == "") {
+	if ($("#pwd").val().trim() == "" || $("#name").val().trim() == "" || $("#phone").val().trim() == "") {
 		alert("입력 필드를 모두 채워주세요.");
 		event.preventDefault(); // submit 이벤트 취소
 		
 	} else if ($("#pwd").val() != $("#pwdCheck").val()) {
 		alert("비밀번호가 다릅니다. 확인해주십시오");
 		event.preventDefault(); // submit 이벤트 취소
-	}else if(!TermAgree.checked) {
-        alert("이용약관 및 개인정보 수집동의에 동의해야 합니다.");
-        event.preventDefault(); // submit 이벤트 취소
 	}
 });
 });
+
+$('input[name="fileload"]').change(function(){
+    setImageFromFile(this, '#image');
+});
+
+function setImageFromFile(input, expression) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+    	
+		reader.onload = function (e) {
+			$(expression).attr('src', e.target.result);
+		}
+		
+		reader.readAsDataURL(input.files[0]);
+	}
+}
 </script>
 
 </body>

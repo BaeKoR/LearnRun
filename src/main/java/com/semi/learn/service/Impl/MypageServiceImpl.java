@@ -34,4 +34,20 @@ public class MypageServiceImpl implements MypageService {
 		return dao.clslist(id);
 	}
 
+	@Override
+	public ClsDto getcls(int seq) {
+		return dao.getcls(seq);
+	}
+
+	@Override
+	public MemberDto getmember(String id) {
+		return dao.getmember(id);
+	}
+
+	@Override
+	public boolean updateMemerAf(MemberDto dto) {
+		int n = dao.updateMemerAf(dto);
+		return n>0?true:false;
+	}
+
 }

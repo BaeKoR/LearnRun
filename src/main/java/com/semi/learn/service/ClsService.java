@@ -14,4 +14,5 @@ public interface ClsService {
 	List<ClsDto> bestClslist();
 	
 	boolean uploadCls(ClsDto dto);
+	boolean updateCls(ClsDto dto);
 }

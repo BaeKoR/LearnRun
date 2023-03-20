@@ -37,4 +37,19 @@ public class MypageDaoImpl implements MypageDao {
 		return session.selectList(ns + "clslist", id);
 	}
 
+	@Override
+	public ClsDto getcls(int seq) {
+		return session.selectOne(ns + "getcls", seq);
+	}
+
+	@Override
+	public MemberDto getmember(String id) {
+		return session.selectOne(ns + "getmember", id);
+	}
+
+	@Override
+	public int updateMemerAf(MemberDto dto) {
+		return session.update(ns + "updateMemerAf", dto);
+	}
+
 }

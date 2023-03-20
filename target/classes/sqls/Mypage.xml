@@ -20,4 +20,22 @@
 		from cls
 		where id=#{id};
 	</select>
+	
+	<select id="getcls" parameterType="Integer" resultType="com.semi.learn.dto.ClsDto">
+		select seq, id, category, title, content, wdate, recommend, filename, newfilename
+		from cls
+		where seq=#{seq}
+	</select>
+	
+	<select id="getmember" parameterType="String" resultType="com.semi.learn.dto.MemberDto">
+		select pwd, name, phone, filename, newfilename
+		from member
+		where id=#{id}
+	</select>
+	
+	<update id="updateMemerAf" parameterType="com.semi.learn.dto.MemberDto">
+		update member
+		set pwd=#{pwd}, name=#{name}, phone=#{phone}, filename=#{filename}, newfilename=#{newfilename}
+		where id=#{id}
+	</update>
 </mapper>

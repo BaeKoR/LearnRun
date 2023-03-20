@@ -37,4 +37,10 @@
 	values(#{id}, #{category}, #{title}, #{content}, now(), 0, #{filename}, #{newfilename})
 </insert>
 
+<update id="updateCls" parameterType="com.semi.learn.dto.ClsDto">
+	update cls
+	set category=#{category}, title=#{title}, content=#{content}, filename=#{filename}, newfilename=#{newfilename}
+	where seq=#{seq}
+</update>
+
 </mapper>
