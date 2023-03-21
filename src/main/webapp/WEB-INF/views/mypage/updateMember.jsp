@@ -5,67 +5,97 @@
 MemberDto login = (MemberDto)session.getAttribute("login");
 MemberDto dto = (MemberDto)request.getAttribute("dto");
 %>
+<style>
+h3 {
+	text-align: left;
+	margin-left: 205px;
+	margin-bottom: 30px;
+	font-weight: 600;
+    font-size: 28px;
+}
+#update-container section {
+	margin: 40px 0;
+}
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+.profile-box {
+    width: 100px;
+    height: 100px; 
+    border-radius: 70%;
+    overflow: hidden;
+    display: inline-block;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.file-box {
+	display: inline-block; vertical-align: super; padding-left: 20px;
+}
+.file-box div {
+	text-align: left; margin-bottom: 15px; font-size: 20px; font-weight: 600;
+}
+.file-box input {
+	width: 325px;
+}
+#update-container table {
+	width: 450px;
+}
+#update-container td {
+	padding-bottom: 30px;
+}
+</style>
 
-<h1>내 정보 수정</h1>
-<div align="center" style="background-color: white;">
-<form action="updateMemberAf" method="post" id="regiFrm" enctype="multipart/form-data">
-<input type="hidden" id="id" name="id" value="<%=login.getId()%>">
-
-<table border="1">
-<tr>
-	<td>프로필 이미지</td>
-	<td>
-		<img alt="" src="upload/<%=dto.getNewfilename()%>" id="image" name="image">
-	</td>
-</tr>
-<tr>
-	<td>파일 변경</td>
-	<td>
-		<input type="hidden" id="filename" name="filename" value="<%=dto.getFilename()%>">
-		<input type="hidden" id="newfilename" name="newfilename" value="<%=dto.getNewfilename()%>">
-		<input type="file" id="fileload" name="fileload">
-	</td>
-</tr>
-<tr>
-	<td>패스워드</td>
-	<td>
-		<input type="text" name="pwd" id="pwd" size="20" value="<%=dto.getPwd()%>">
-	</td>
-</tr>
-<tr>
-	<td>패스워드확인</td>
-	<td>
-		<input type="text" id="pwdCheck" name="pwdCheck" size="20" value="<%=dto.getPwd()%>"><br>
-		<p id="pwdCheckWrite" style="font-size: 8px"></p>	<!-- 비밀번호를 확인해주십시오 입력칸 -->
-	</td>
-</tr>
-<tr>
-	<td>이름</td>
-	<td>
-		<input type="text" name="name" id="name" size="20" value="<%=dto.getName()%>">
-	</td>
-</tr>
-<tr>
-	<td>전화번호</td>
-	<td>
-		<input type="text" name="phone" id="phone" size="20" value="<%=dto.getPhone()%>">
-	</td>
-</tr>
-<tr>
-	<td colspan="2" align="center">
-		<input type="submit" value="수정">		
-	</td>
-</tr>
-</table>
-</form>
+<div id="update-container" align="center">
+	<h3>내 정보 수정</h3>
+	<form action="updateMemberAf" method="post" id="regiFrm" enctype="multipart/form-data">
+		<input type="hidden" id="id" name="id" value="<%=login.getId()%>">
+		
+		<section>
+			<div class="profile-box">
+				<img class="profile" alt="프로필 사진" src="upload/<%=dto.getNewfilename()%>" name="image" />
+			</div>
+			<div class="file-box">
+				<div><%=login.getId()%></div>
+				<input type="hidden" id="filename" name="filename" value="<%=dto.getFilename()%>">
+				<input type="hidden" id="newfilename" name="newfilename" value="<%=dto.getNewfilename()%>">
+				<input type="file" id="fileload" name="fileload" class="form-control form-control-sm">
+			</div>
+		</section>
+		
+		<table>
+			<tr>
+				<td>
+					<label for="name">이름</label>
+					<input type="text" name="name" id="name" class="form-control" value="<%=dto.getName()%>">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="phone">전화번호</label>
+					<input type="text" name="phone" id="phone" class="form-control" value="<%=dto.getPhone()%>" placeholder="숫자만 입력">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="pwd">비밀번호</label>
+					<input type="password" name="pwd" id="pwd" class="form-control" value="<%=dto.getPwd()%>">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="pwdCheck">비밀번호 확인</label>
+					<input type="password" id="pwdCheck" name="pwdCheck" class="form-control" value="<%=dto.getPwd()%>"><br>
+					<p id="pwdCheckWrite" style="font-size: 8px"></p>	<!-- 비밀번호를 확인해주십시오 입력칸 -->
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<input type="submit" value="수정" class="btn btn-dark" style="width:450px; background-color: #3f3e3d;">		
+				</td>
+			</tr>
+		</table>
+	</form>
 </div>
 
 <script type="text/javascript">
@@ -109,7 +139,7 @@ $("#regiFrm").submit(function(event) {
 });
 
 $('input[name="fileload"]').change(function(){
-    setImageFromFile(this, '#image');
+    setImageFromFile(this, '.profile');
 });
 
 function setImageFromFile(input, expression) {
@@ -124,6 +154,3 @@ function setImageFromFile(input, expression) {
 	}
 }
 </script>
-
-</body>
-</html>

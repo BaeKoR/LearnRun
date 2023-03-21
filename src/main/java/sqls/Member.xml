@@ -29,7 +29,7 @@
 
  <!-- 로그인 -->
 <select id="login" parameterType="com.semi.learn.dto.MemberDto" resultType="com.semi.learn.dto.MemberDto">
-	select id, name, email, phone
+	select id, pwd, name, email, phone, newfilename
 	from member
 	where id=#{id} and pwd=#{pwd}
 </select>

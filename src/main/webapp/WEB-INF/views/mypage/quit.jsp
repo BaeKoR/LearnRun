@@ -4,9 +4,11 @@
 
 <style>
 #quit-container h3 {
-	text-align: left; 
+	text-align: left;
+	margin-left: 205px;
 	margin-bottom: 30px;
 	font-weight: 600;
+    font-size: 28px;
 }
 #quit-container h5 {
 	font-weight: 600;
@@ -15,10 +17,17 @@
 	white-space: pre; margin: 50px;
 }
 #quit-container div {
-	width: 550px; margin: auto; word-break: keep-all;
 }
-#quit-container>div>p {
-	text-align: left; margin-left:  20px; text-indent: -20px;
+#quit-container div>div {
+	width: 550px; 
+    margin: 0 180px 0 auto;
+    padding: 16px 10px 0px 16px;
+	word-break: keep-all;
+	border: 1px solid #ced4da;
+	border-radius: 2%;
+}
+#quit-container>div p {
+	text-align: left; margin-left: 20px; text-indent: -20px;
 }
 #quit-container .form-control {
 	margin: 30px auto; width: 550px;
@@ -40,7 +49,7 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 	🙇🏻‍♂️ 감사합니다 🙇🏻‍♀️
 	</p>
 	
-	<div>
+	<div><div>
 		<p>
 		1. 탈퇴 시 계정과 관련된 모든 권한이 사라지며 복구할 수 없습니다.
 		</p>
@@ -53,7 +62,7 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 		<p>
 		4. 현재 비밀번호를 입력하고 탈퇴하기를 누르시면 위 내용에 동의하는 것으로 간주됩니다.
 		</p>
-	</div>
+	</div></div>
 
 	<form action="quitAf" method="post">
 		<input type="hidden" name="id" value="<%= login.getId() %>" />

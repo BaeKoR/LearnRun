@@ -31,6 +31,12 @@ public class LessonController {
 	@GetMapping(value = "lesson")
 	public String lesson(int cls_seq, QnaParam param, Model model) {
 		
+		// 등록된 lesson이 없을 때
+		if(!service.countLesson(cls_seq)) {
+			model.addAttribute("lesson", "EMPTY");
+			return "message";
+		}
+
 		// 강의 목차 가져오기
 		List<LessonDto> list = service.getLessonList(cls_seq);
 		

@@ -1,6 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- 강의 듣기 메세지 -->
+<%
+String lesson = (String)request.getAttribute("lesson");
+if(lesson != null && !lesson.equals("")) {
+	if(lesson.equals("EMPTY")) {
+		%>
+		<script type="text/javascript">
+			alert('아직 등록된 강의가 없습니다.');
+			history.back();
+		</script>
+		<%
+	} else {
+		%>
+		<script type="text/javascript">
+			alert("error");
+			location.href = "/LearnRun/mainpage";
+		</script>
+		<%
+	}
+}
+%>
+
 <!-- 후기 작성 메세지 -->
 <%
 String review = (String)request.getAttribute("review");
