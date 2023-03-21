@@ -5,6 +5,8 @@
 
 <link href="//vjs.zencdn.net/7.10.2/video-js.min.css" rel="stylesheet">
 <script src="//vjs.zencdn.net/7.10.2/video.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/videojs-seek-buttons/dist/videojs-seek-buttons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/videojs-seek-buttons/dist/videojs-seek-buttons.min.js"></script>
 <style type="text/css">
 	.vjs-default-skin .vjs-big-play-button {	border: 0;	}
 </style>
@@ -37,20 +39,18 @@ LessonDto dto = (LessonDto)request.getAttribute("dto");
 </div>
 
 <script type="text/javascript">
-	/* 경로 변경하고, 새파일이름으로 변경해야함 */
+	
 	document.getElementById("mp4_src").src = "upload/<%= dto.getNewfilename() %>";
+	
+	var player = videojs("myVideo", {});
+	
+	/* 뒤로, 앞으로 버튼 */
+	player.seekButtons({
+	    forward: 10,
+	    back: 10
+    });
+	
 	document.getElementById("myVideo").load();
 	
-	
-    /* 재생, 정지 로그 출력
-    const video = document.getElementById('myVideo');
-
-    video.addEventListener('play', (event) => {
-        console.log('play');
-    });
-    video.addEventListener('pause', (event) => {
-        console.log('pause');
-    }); 
-	});*/
 </script>
 

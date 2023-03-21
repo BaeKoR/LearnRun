@@ -14,7 +14,8 @@
 	font-weight: 600;
 }
 #quit-container>p {
-	white-space: pre; margin: 50px;
+	white-space: pre; 
+	margin: 50px 0;
 }
 #quit-container div {
 }
@@ -34,6 +35,7 @@
 }
 #quit-container .btn {
 	width: 550px;
+	background-color: #3f3e3d;
 }
 </style>
 
@@ -60,14 +62,14 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 		3. 탈퇴 후 동일한 메일로 재가입이 가능하나, 탈퇴한 계정과 연동되지 않습니다.
 		</p>
 		<p>
-		4. 현재 비밀번호를 입력하고 탈퇴하기를 누르시면 위 내용에 동의하는 것으로 간주됩니다.
+		4. 현재 비밀번호를 입력하고 탈퇴 신청하기를 누르시면 위 내용에 동의하는 것으로 간주됩니다.
 		</p>
 	</div></div>
 
 	<form action="quitAf" method="post">
 		<input type="hidden" name="id" value="<%= login.getId() %>" />
 		<input type="password" name="pwd" class="form-control" autocomplete="off" placeholder="비밀번호 입력"/>
-		<button type="button" class="btn btn-secondary">탈퇴하기</button>
+		<button type="button" class="btn btn-secondary">탈퇴 신청하기</button>
 	</form>
 </div>
 
@@ -76,6 +78,9 @@ $(document).ready(function () {
 	$("form button").click(function () {
 		if($(this).prev().val().trim() == ""){
 			alert("비밀번호를 입력해주세요");
+			return;
+		} else if($(this).prev().val().trim() !== "<%=login.getPwd()%>"){
+			alert("비밀번호가 일치하지 않습니다");
 			return;
 		} else {
 			$(this).parent().submit();

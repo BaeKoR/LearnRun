@@ -27,7 +27,8 @@
 float: left;
 vertical-align: top;
 text-align: left;
-width: 20%; 
+width: 20%;
+height: 770px;
 padding: 80px 20px 80px 0;
 }
 #menu h2 {

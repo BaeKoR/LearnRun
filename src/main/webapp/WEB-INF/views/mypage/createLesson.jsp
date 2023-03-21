@@ -11,13 +11,18 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- jQuery, bootstrap -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 <!-- summernote css/js -->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 <style type="text/css">
+.modal-dialog{
+	margin-top: 400px;
+}
 table {
     border-collapse: collapse;
 }

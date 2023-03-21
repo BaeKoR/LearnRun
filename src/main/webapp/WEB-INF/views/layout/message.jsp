@@ -52,13 +52,14 @@ if(quit != null && !quit.equals("")) {
 	if(quit.equals("OK")) {
 		%>
 		<script type="text/javascript">
+			alert('회원 탈퇴를 신청하였습니다. \n2-3일 내 탈퇴가 승인됩니다.');
 			location.href = "/LearnRun/mainpage";
 		</script>
 		<%
 	} else {
 		%>
 		<script type="text/javascript">
-			alert("패스워드를 다시 확인하세요.");
+			alert("다시 시도해주세요.");
 			location.href = "/LearnRun/quit";
 		</script>
 		<%
