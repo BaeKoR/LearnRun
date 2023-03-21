@@ -102,9 +102,9 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 				<div class="body-left">
 					<h5 class="card-title"><%=list.getTitle()%></h5>
 					<div style="display: flex;">
-						<div class="cls-id">
+						<!-- <div class="cls-id">
 							<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
-						</div>
+						</div> -->
 						<p><%=list.getId() %></p>
 					</div>
 				</div>
