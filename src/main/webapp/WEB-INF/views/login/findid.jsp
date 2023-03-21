@@ -1,34 +1,62 @@
 <%@page import="com.semi.learn.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+
+.find_form{	
+	
+	width: 450px;
+	height: 600px;
+	margin-top: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) ; 
+	background-color: white;  
+	padding: 20px;
+	font-family: 'Yaldevi Colombo SemiBold'!important;
+ 
+}
+
+</style>
+
+
 </head>
 <body>
 
 <section class="vh-100" style="background-color: #F8EEE1;">
-<div class="container py-5 h-100">
+<div class="container py-5 h-100" style="background-color: #F8EEE1;">
 
 
-<div align="center">
+<div align="center" class="find_form" >
 <h3>아이디찾기</h3>
+<br>
 
 
-이름: <input type="text" id="name"  size="30" placeholder="이름을 입력하세요"><br>
-이메일: <input type="text" id="email" size="30"  placeholder="가입한 이메일을 입력하세요">
+<input type="text" id="name" name="name" size="30" class="form-control email-input" placeholder="이름을 입력하세요"><br>
+<input type="text" id="email" name="email" size="30" class="form-control email-input"  placeholder="가입한 이메일을 입력하세요">
 <br><br>
-<button type="button" id="findIdBtn"  >아이디 찾기</button>
+<button type="button" id="findIdBtn" class="btn btn-dark btn-lg btn-block" >아이디 찾기</button>
 
-<h3>가입된 아이디</h3>
-<input type="text" id="regiId" readonly="readonly" >
+<br>
+
+
+<h3>가입정보</h3>
+<input type="text" id="regiId" class="form-control email-input"  readonly="readonly" >
 <br><br>
-<button type="button" onclick="location.href='login'">로그인</button>
-<button type="button" onclick="location.href='findPassword'">비밀번호 찾기</button>
 
+<button type="button" onclick="location.href='findPassword'" 
+class="btn btn-dark btn-lg btn-block" >비밀번호 찾기</button>
+<br>
+<a href="login" style="text-decoration: underline;">로그인하기</a>
+<!-- <button type="button" onclick="location.href='login'">로그인</button> -->
 </div>
 
 
@@ -41,6 +69,8 @@
 
 
 $(document).ready(function(){
+	
+	
 	
 	$("#findIdBtn").click(function () {
 		
@@ -58,8 +88,8 @@ $(document).ready(function(){
 			data:{ "email":$("#email").val(), "name":$("#name").val()},
 			success:function(mem){
 				// alert("success");
-				console.log(mem);
-				//alert(mem);				
+				// console.log(mem);
+				//alert(mem);			
 				
 				// mem 객체가 유효하지 않은 경우
 			    if (!mem || !mem.id) {

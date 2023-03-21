@@ -7,12 +7,19 @@
 <script type="text/javascript" src="resources/jquery/jquery.twbsPagination.min.js"></script>
 
 <style>
+#detail-table {
+ 	margin: auto;
+}
+#detail-table td {
+	min-width: 400px;
+}
 #tbody tr {
 	border-bottom: 1px solid #ced4da;
 }
 #tbody tr>td:first-child {
 	vertical-align: top;
 }
+
 .reviewId {
 	width: 600px; float: left;
 }
@@ -87,12 +94,12 @@ List<Map<String, Object>> reviewlist = (List<Map<String, Object>>)request.getAtt
 int totalPages = (Integer)request.getAttribute("totalPages");
 %>
 
-<div style="padding: 0 30px;">
+<div style="padding: 30px;">
 
-	<table style="margin: auto;">
+	<table id="detail-table">
 		<tr>
 			<td rowspan="5">
-				<img style="width: 500px; height: 300px; border-radius: 5%;" src="upload/<%=list.getNewfilename()%>" />
+				<img style="width: 450px; height: 300px; border-radius: 5%;" src="upload/<%=list.getNewfilename()%>" />
 			</td>
 			<td>
 				<%=list.getCategory()%>
@@ -100,12 +107,12 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 		</tr>
 		<tr>
 			<td>
-				<strong><%=list.getTitle()%></strong>
+				<strong style="font-size: 1.4rem;"><%=list.getTitle()%></strong>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<%=list.getId()%>
+				강사 : <%=list.getId()%>
 			</td>
 		</tr>
 		<tr>
@@ -114,15 +121,16 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<a href="#" class="like-btn" style="float: left;">
+			<td><div style="text-align:center;">
+				<a href="#" class="like-btn" style="display:inline-block;">
 				    <svg class="like_icon" width="28" height="26" 
 				    	viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
 					5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z" />
 					</svg>
 				</a>
-				<div style="float: left;">좋아요</div>
+				<div style="display:inline-block;">좋아요</div>
+				</div>
 			</td>
 		</tr>
 		<tr>
@@ -218,7 +226,8 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 				});
 			}
 			
-			$('#writeBtn').click(function () {
+			/* 후기 작성 */
+			$(document).on("click","#writeBtn", function() {
 				/* 빈칸 검사 */
 				if($(this).prev().val().trim() == ""){
 					alert("내용을 입력해주세요");
@@ -228,7 +237,8 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 				}
 			});
 			
-			$("#show-update").click(function () {
+			/* 후기 수정 */
+			$(document).on("click","#show-update", function() {
 				let str = '<form action="/LearnRun/updateReview" method="post">'
 					+ '<input type="hidden" name="cls_seq" value="<%= list.getSeq() %>" />'
 	  	  			+ '<input type="hidden" name="id" value="<%= id %>" />'
@@ -236,7 +246,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 	  				+ '<button id="updateBtn" type="button" class="btn btn-light">작성</button></form>';
 				$(this).next().html(str);
 			});
-			$("#updateBtn").click(function () {
+			$(document).on("click","#updateBtn", function() {
 				/* 빈칸 검사 */
 				if($(this).prev().val().trim() == ""){
 					alert("내용을 입력해주세요");
@@ -247,7 +257,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			});
 			
 			/* 수강신청 기능 */
-			$("#takingBtn").click(function () {
+			$(document).on("click","#takingBtn", function() {
 				if("<%=id%>" === "") {
 					alert('로그인 후 사용 가능합니다.');
 					return;

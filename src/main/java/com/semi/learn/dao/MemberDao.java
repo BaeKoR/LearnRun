@@ -10,7 +10,10 @@ public interface MemberDao {
 	
 	MemberDto login(MemberDto dto);
 	
-	int emailCheck(String email);
+	MemberDto emailCheck(String email);
+	
+	// 멤버정보확인	
+	MemberDto getMember(MemberDto dto);
 	
 	// id찾기
 	MemberDto findId(MemberDto dto);	
@@ -26,4 +29,7 @@ public interface MemberDao {
 	
 	// 비밀번호 재설정
 	int pwdUpdate(MemberDto dto);
+//	MemberDto pwdUpdate(MemberDto dto);
+	
+	
 }
