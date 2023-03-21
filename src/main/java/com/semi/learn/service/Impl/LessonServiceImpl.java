@@ -16,7 +16,13 @@ public class LessonServiceImpl implements LessonService {
 
 	@Autowired
 	LessonDao dao;
+	
+	@Override
+	public boolean countLesson(int cls_seq) {
+		return dao.countLesson(cls_seq) > 0;
+	}
 
+	
 	@Override
 	public LessonDto getLesson(int les_seq) {
 		return dao.getLesson(les_seq);

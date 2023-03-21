@@ -21,6 +21,11 @@ public class LessonDaoImpl implements LessonDao {
 	String ns = "Lesson."; // ns: namespace
 	
 	@Override
+	public int countLesson(int cls_seq) {
+		return session.selectOne(ns + "countLesson", cls_seq);
+	}
+	
+	@Override
 	public LessonDto getLesson(int les_seq) {
 		return session.selectOne(ns + "getLesson", les_seq);
 	}

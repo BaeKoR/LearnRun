@@ -17,6 +17,7 @@ LessonDto dto = (LessonDto)request.getAttribute("dto");
 <div style="height: 100%;">
 	<!-- 강의 영상 video.js 사용 (cdn 삽입함) -->
 	<video
+	  src=""
 	  id="myVideo"
 	  class="video-js vjs-big-play-centered vjs-default-skin vjs-big-play-button"
 	  width="900"
@@ -24,7 +25,7 @@ LessonDto dto = (LessonDto)request.getAttribute("dto");
 	  data-setup='{"controls": true, "autoplay": false, "preload": "auto", 
 	  				"playbackRates": [0.5, 1, 1.2, 1.5, 1.8, 2]}'>
 	  
-	  <source id="mp4_src" src="" type="video/mp4" />
+	  <source id="mp4_src"  type="video/mp4" />
 	  
 	</video>
 	
@@ -37,7 +38,7 @@ LessonDto dto = (LessonDto)request.getAttribute("dto");
 
 <script type="text/javascript">
 	/* 경로 변경하고, 새파일이름으로 변경해야함 */
-	document.getElementById("mp4_src").src = "/LearnRun/resources/video/<%= dto.getFilename() %>";
+	document.getElementById("mp4_src").src = "upload/<%= dto.getNewfilename() %>";
 	document.getElementById("myVideo").load();
 	
 	

@@ -3,9 +3,15 @@
 
 <mapper namespace="Lesson">
 
+	<select id="countLesson" parameterType="Integer" resultType="Integer">
+		select ifnull(count(*), 0)
+		from lesson
+		where cls_seq=#{cls_seq}
+	</select>
+	
 	<select id="getLesson" parameterType="Integer" resultType="com.semi.learn.dto.LessonDto">
 		select * from lesson
-		where cls_seq=#{cls_seq}
+		where seq=#{les_seq}
 	</select>
 	
 	<select id="getLessonList" parameterType="Integer" resultType="com.semi.learn.dto.LessonDto">

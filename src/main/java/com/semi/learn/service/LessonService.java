@@ -8,6 +8,7 @@ import com.semi.learn.dto.QnaParam;
 
 public interface LessonService {
 	
+	boolean countLesson(int cls_seq);
 	LessonDto getLesson(int les_seq);
 	List<LessonDto> getLessonList(int cls_seq);
 	String getClsTitle(int cls_seq);

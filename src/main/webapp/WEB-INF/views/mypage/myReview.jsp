@@ -9,12 +9,17 @@
 
 <style>
 #myReview-container h3 {
-	text-align: left; 
+	text-align: left;
+	margin-left: 205px;
 	margin-bottom: 30px;
 	font-weight: 600;
+    font-size: 28px;
 }
 #myReview-container .card-body {
 	padding: 10px 20px;
+}
+#card-list {
+	margin-left: 205px;
 }
 #card-list>div {
 	text-align: left;
@@ -24,16 +29,17 @@
 	width: 800px;
 	float: left;
 }
-.card p {
-	text-indent: -15px;
-	margin: 10px 0 10px 15px;
-	word-break: keep-all;
-}
 .card-body>span:first-child {
 	font-weight: 600;
 }
-.card-body>span:first-child {
-	color: #ababab; font-size: 0.9rem;
+.card-body>span:nth-child(2) {
+	color: #ababab; 
+	font-size: 0.9rem;
+}
+.card-body>p {
+	text-indent: -15px;
+	margin: 10px 0 10px 15px;
+	word-break: keep-all;
 }
 #load {
 	width: 800px; float: left;
@@ -56,7 +62,7 @@ List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute
 			Map<String, Object> map = list.get(i);
 		%>
 		<div class="card">
-			<a href="LearnRun/cls?seq=<%=map.get("seq")%>"><!-- 클래스 상세페이지로 -->
+			<a href="clsDetail?seq=<%=map.get("seq")%>"><!-- 클래스 상세페이지로 -->
 				<div class="card-body">
 					<span><%= map.get("title") %></span>&nbsp;&nbsp;
 					<span><%= Utility.dateFormat((Timestamp)map.get("wdate")) %> 작성</span>

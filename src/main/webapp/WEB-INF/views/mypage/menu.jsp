@@ -27,7 +27,7 @@ MemberDto login = (MemberDto)session.getAttribute("login");
           <a style="color: ${current == 'myReview' ? 'red':''} !important;" class="nav-link" href="/LearnRun/myReview?id=<%=login.getId()%>">작성한 후기</a>
         </li>
         <li class="nav-item">
-          <a style="color: ${current == 'updateMember' ? 'red':''} !important;" class="nav-link" href="/LearnRun/pwdCheck?id=<%=login.getId()%>">내 정보 수정</a>
+          <a style="color: ${current == 'updateMember' || current == 'pwdCheck' ? 'red':''} !important;" class="nav-link" href="/LearnRun/pwdCheck?id=<%=login.getId()%>">내 정보 수정</a>
         </li>
         <li class="nav-item">
           <a style="color: ${current == 'quit' ? 'red':''} !important;" class="nav-link" href="/LearnRun/quit?id=<%=login.getId()%>">회원 탈퇴</a>
