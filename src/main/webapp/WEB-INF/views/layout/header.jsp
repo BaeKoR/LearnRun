@@ -35,7 +35,7 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 				<%
 				} else {
 				%>
-				<a href="/LearnRun/myCls?id=<%=login.getId()%>">나의 강의장</a> <a
+				<a href="/LearnRun/myCls?id=<%=login.getId()%>"><%=login.getName() %>님의 강의장</a> <a
 					href="/LearnRun/logout" style="margin-left: 15px">로그아웃</a>
 				<%
 				}
