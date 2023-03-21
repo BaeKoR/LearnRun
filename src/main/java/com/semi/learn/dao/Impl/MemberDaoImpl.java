@@ -46,11 +46,12 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int emailCheck(String email) {
+	public MemberDto emailCheck(String email) {
 		return session.selectOne(ns + "emailCheck", email);
 	}
 
 	@Override
+	// 비밀번호 업데이트 
 	public int pwdUpdate(MemberDto dto) {
 		return session.update(ns + "pwdUpdate", dto);
 	}
@@ -58,6 +59,11 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public MemberDto findId(MemberDto dto) {
 		return session.selectOne(ns + "findId", dto);
+	}
+
+	@Override
+	public MemberDto getMember(MemberDto dto) {
+		return session.selectOne(ns + "getMember", dto);
 	}
 	
 }

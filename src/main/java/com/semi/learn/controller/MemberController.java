@@ -1,6 +1,5 @@
 package com.semi.learn.controller;
 
-import java.util.Date;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -74,8 +73,11 @@ public class MemberController {
 	public String regiAf(MemberDto dto, Model model) throws Exception {
 
 		boolean isS = service.addMember(dto);
+		
+		// 인증번호 업데이트
 		service.updateMailKey(dto);
-		service.updateMailAuth(dto);
+		// 인증여부 업데이트
+		service.updateMailAuth(dto);		
 
 		System.out.println(dto.getMail_key());
 
@@ -93,25 +95,19 @@ public class MemberController {
 
 	// 이메일 인증 보내기
 	@ResponseBody
-	@GetMapping(value = "emailSend")
+	@GetMapping(value = "emailAuth")
 	public String emailSend(MemberDto dto) throws Exception {
 
 		// 랜덤번호 생성 TempKey클래스 불러옴
 		String mail_key = new TempKey().getKey(10, false); // 랜덤키 길이 설정
 		System.out.println(mail_key); // 메일키 확인
-
-		// 인증을 위한 이메일 발송
-		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[LearnRun 인증메일 입니다.]"); // 메일제목
-		sendMail.setText("<h1>LearnRun 메일인증</h1>" + "<br>아래 인증번호를 확인해주세요." + "<br> 인증번호: " + mail_key);
-		sendMail.setFrom("learnrun.service@gmail.com", "LearnRun");
-		sendMail.setTo(dto.getEmail());
-		sendMail.send();
-
-		service.updateMailKey(dto); // db에 메일키 넣어주기
-
+		
+		// 이메일인증 메일발송
+		service.emailAuthSend(dto, mail_key);		
+		
 		// 인증키 보내주기.
 		return mail_key;
+
 
 	}
 
@@ -123,21 +119,12 @@ public class MemberController {
 		// 랜덤번호 생성 TempKey클래스 불러옴
 		String mail_key = new TempKey().getKey(10, false); // 랜덤키 길이 설정
 		System.out.println(mail_key); // 메일키 확인
-
-		// 인증을 위한 이메일 발송
-		MailHandler sendMail = new MailHandler(mailSender);
-		sendMail.setSubject("[LearnRun 비밀번호 재설정 이메일 입니다.]"); // 메일제목
-		sendMail.setText("<h1>LearnRun 비밀번호 재설정</h1>" + "<br>패스워드 초기화를 위해 하단의 링크를 통해 패스워드를 초기화 해주세요."
-				+ "<br><a href='http://localhost:8090/LearnRun/pwdUpdate?email=" + dto.getEmail() + "&mail_key="
-				+ mail_key + "' target='_blank'>패스워드 초기화</a>");
-
-		sendMail.setFrom("learnrun.service@gmail.com", "LearnRun");
-		sendMail.setTo(dto.getEmail());
-		sendMail.send();
-
-		//  redisUtil.setDataExpire(authKey, email, 60 * 5L);
-
-		service.updateMailKey(dto); // db에 메일키 넣어주기
+		
+		dto.setMail_key(mail_key);
+		
+		service.pwdResetEmail(dto, mail_key);	// 비밀번호재설정이메일 발송
+		service.updateMailKey(dto);
+//		System.out.println(dto.getMail_key()+"~~");
 
 		// 인증키 보내주기.
 		return mail_key;
@@ -165,8 +152,8 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping(value = "findIdAf")
 	public MemberDto findIdAf(MemberDto dto) {
-		MemberDto mem = service.findId(dto);
-				
+		MemberDto mem = service.findId(dto);		
+		
 		return mem;
 	}
 
@@ -179,14 +166,12 @@ public class MemberController {
 	// 가입된 이메일인지 확인
 	@ResponseBody
 	@GetMapping(value = "emailCheck")
-	public String emailCheck(String email) {
+	public MemberDto emailCheck(String email) {
 
-		int count = service.emailCheck(email);
+		MemberDto dto = service.emailCheck(email);
+		
+		return dto;		
 
-		if (count > 0) {
-			return "YES";
-		}
-		return "NO";
 	}
 
 	// 비밀번호 재설정 페이지
@@ -200,7 +185,7 @@ public class MemberController {
 	public String pwdUpdateAf(MemberDto dto) {
 
 		// service.updateMailKey(dto);
-		int count = service.pwdUpdate(dto);
+		int count = service.pwdUpdate(dto);		
 
 		if (count > 0) {
 			return "UPDATE_OK";
@@ -208,6 +193,14 @@ public class MemberController {
 		return "UPDATE_FAIL";
 	}
 	
-	
+	// 멤버정보 가져오기
+	@ResponseBody
+	@GetMapping(value = "getMember")
+	public MemberDto getMember(MemberDto dto) {
+		 
+		MemberDto mem = service.getMember(dto);
+		
+		return mem;		
+	}
 
 }

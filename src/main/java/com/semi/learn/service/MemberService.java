@@ -11,9 +11,11 @@ public interface MemberService {
 	
 	MemberDto login(MemberDto dto);
 	
-	int emailCheck(String email);	// int로 체크
+	MemberDto emailCheck(String email);	// dto값 보내줌
 	
 	MemberDto findId(MemberDto dto);
+	
+	MemberDto getMember(MemberDto dto);
 	
 	// 이메일 인증
 	// 인증키 디비에 넣어주기
@@ -24,4 +26,8 @@ public interface MemberService {
 	
 	int pwdUpdate(MemberDto dto);
 	
+	// 메일발송
+	void emailAuthSend(MemberDto dto, String mail_key) throws Exception;
+	
+	void pwdResetEmail(MemberDto dto, String mail_key) throws Exception;
 }

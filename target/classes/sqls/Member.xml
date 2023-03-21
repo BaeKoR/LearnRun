@@ -4,10 +4,10 @@
 <mapper namespace="Member">
 
 <!-- result타입 없음 -->
-<!-- 회원가입 -->
+<!-- 회원가입 기본프사값 추가하기. db에 추가 -->
 <insert id="addMember" parameterType="com.semi.learn.dto.MemberDto">
 	insert into member(id, pwd, name, email, phone, auth, filename, newfilename)
-	values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, 3, "image.jpg", "image.jpg")	
+	values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, 3, null, null)	
 </insert>
 	
 <!-- 							들어오는값					return 값 -->
@@ -19,9 +19,9 @@
 </select>
 
 <!-- 가입되어있는 이메일인지 확인 -->
-
-<select id="emailCheck" parameterType="java.lang.String" resultType="Integer">
-	select count(*)
+<!-- member 정보 보내주기-->
+<select id="emailCheck" parameterType="java.lang.String" resultType="com.semi.learn.dto.MemberDto">
+	select id, name, email, phone
 	from member
 	where email=#{email}
 </select>
@@ -29,17 +29,18 @@
 
  <!-- 로그인 -->
 <select id="login" parameterType="com.semi.learn.dto.MemberDto" resultType="com.semi.learn.dto.MemberDto">
-	select id, name, email
+	select id, name, email, phone
 	from member
 	where id=#{id} and pwd=#{pwd}
 </select>
 
 
 <!-- 비밀번호 재설정 -->
+<!-- 메일키 다시넣어주기 -->
 <update id="pwdUpdate" parameterType="com.semi.learn.dto.MemberDto">
 	update member
 	set pwd=#{pwd}
-	where email=#{email}
+	where email=#{email} and mail_key=#{mail_key}
 </update>
 
 <!-- 아이디 찾기 -->
@@ -56,7 +57,8 @@
 <!-- 비밀번호재설정할때 아이디랑 이메일 입력둘다해보기 -->
 <update id="updateMailKey" parameterType="com.semi.learn.dto.MemberDto">
     update member 
-    set mail_key=#{mail_key} where email=#{email} and id=#{id}
+    set mail_key=#{mail_key} 
+    where email=#{email} and id=#{id}
 </update> 
 	
 <!-- 메일 인증을 하면 mail_auth 컬럼을 기본값 0에서 1로 바꿔 로그인을 허용 -->
@@ -71,7 +73,13 @@
     select count(*) from member where id=#{id} and mail_auth=1
 </select>
 
-
+<!-- 멤버 정보확인 -->
+<!-- id, name, email, phone, auth, mail_auth, mail_key -->
+<select id="getMember" parameterType="com.semi.learn.dto.MemberDto" resultType="com.semi.learn.dto.MemberDto">
+	select *
+	from member
+	where email=#{email}
+</select>
 
 
 </mapper>
