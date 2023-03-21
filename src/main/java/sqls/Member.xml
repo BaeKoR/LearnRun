@@ -7,7 +7,7 @@
 <!-- 회원가입 기본프사값 추가하기. db에 추가 -->
 <insert id="addMember" parameterType="com.semi.learn.dto.MemberDto">
 	insert into member(id, pwd, name, email, phone, auth, filename, newfilename)
-	values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, 3, null, null)	
+	values(#{id}, #{pwd}, #{name}, #{email}, #{phone}, 3, image.jpg, image.jpg)	
 </insert>
 	
 <!-- 							들어오는값					return 값 -->

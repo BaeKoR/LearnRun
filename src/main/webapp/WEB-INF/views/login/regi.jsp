@@ -106,6 +106,7 @@ input[type="submit"]{
 	transform: translate(-50%, -50%) !important;   
 	background-color: white;
 	padding: 20px !important;
+	border-radius: 10px;
  
 } 
 span{
