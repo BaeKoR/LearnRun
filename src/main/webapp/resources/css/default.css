@@ -193,8 +193,11 @@
     margin-top: 7px;
     margin-left: 2px;
 }
-.clslist .cls-id .cls-profile {
-	margin-right: 6px;
+.cls-id {
+	display: flex;
+}
+.cls-profile {
+	margin-right: 8px;
     flex-direction: row;
     max-width: 24px;
     max-height: 24px;
@@ -212,7 +215,7 @@
     justify-content: center;
     background-color: #e7e7e7;
 }
-.clslist .cls-id .cls-profile > img {
+.clslist .cls-profile > img, .detail-content .cls-profile > img {
 	color: transparent;
     width: 100%;
     height: 100%;
@@ -232,3 +235,81 @@
     background-color: #666462;
     border: 0;
 }
+
+/* cls detail */
+.detail-content {
+	width: 900px;
+	display: inline-block;
+	margin-bottom: 50px;
+}
+.detail-content .card {
+	border: 0;
+	margin: 40px 0 30px 0;
+}
+.detail-content .cls-img {
+	overflow: hidden;
+    border-radius: 0.5rem;
+    height: 500px;
+    margin-bottom: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: gray;
+    position: relative;
+}
+.detail-content .cls-img > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.detail-content .card-body .body-left {
+	width: 645px;
+	float: left;
+	text-align: left;
+}
+.detail-content .card-body .body-right {
+	text-align: right;
+}
+.detail-content .card-title {
+	margin-bottom: 10px;
+    font-size: 23px;
+    font-weight: 600;
+}
+.detail-content .card-text {
+	text-align: left;
+    color: #646260;
+    margin-left: 10px;
+}
+.detail-content p {
+	margin-bottom: 10px;
+}
+.detail-content .btn-secondary {
+    color: #fff !important;
+    background-color: #f76b5c;
+    border: 0;
+}
+.detail-content .btn-secondary:hover {
+    color: #fff !important;
+    background-color: #ed534f;
+    border: 0;
+}
+.detail-content .btn-light {
+    color: #3f3e3d !important;
+    background-color: #f8eee1;
+    border: 0;
+}
+.detail-content .btn-light:hover {
+    color: #3f3e3d !important;
+    background-color: #efe2d1;
+    border: 0;
+}
+/* cls review */
+.detail-content .cls-review {
+	text-align: left;
+	margin: 1rem;
+}
+.detail-content #show-update {
+	margin-left: 10px;
+	color: #7a7774!important;
+}
+

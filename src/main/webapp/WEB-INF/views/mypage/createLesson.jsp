@@ -12,63 +12,69 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 <title>Insert title here</title>
 
 <!-- jQuery, bootstrap -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 <!-- summernote css/js -->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
+<style type="text/css">
+table {
+    border-collapse: collapse;
+}
+td {
+  	border: 1px solid #e3e3e3;
+}
+</style>
+
 </head>
 <body>
 
-<div>
-<form action="writeCls" id="frm" method="post" enctype="multipart/form-data">
-<input type="hidden" id="id" name="id" value="<%=login.getId()%>">
-
-<table>
-<col width="10"><col width="10">
-
-<tr>
-	<td>
-		<input type="text" id="title" name="title" placeholder="강의 제목">
-	</td>
-	<td rowspan="3">
-		<img src="" id="image" name="image"/>
-	</td>
-</tr>
-<tr>
-	<td>
-		<select id="category" name="category">
-			<option>카테고리</option>
-			<option>요리</option>
-			<option>디자인</option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		<input type="file" id="fileload" name="fileload"><!-- class="files" -->
-	</td>
-</tr>
-<tr>
-	<td>
-		1MB이하의 jpg, png 확장자 파일만 적용 가능합니다
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<textarea cols="200" rows="30" id="summernote" name="content" placeholder="강의 내용"></textarea>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-		<button type="button">강의 등록</button>
-	</td>
-</tr>
-</table>
-</form>
+<div style="width: 1200px; display: inline-block; margin: 80px 0;">
+	<form action="writeCls" id="frm" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="id" name="id" value="<%=login.getId()%>">
+	
+	<table>
+	<col width="800px"><col width="800px">
+	
+	<tr style="text-align: left;">
+		<td>
+			<input type="text" id="title" name="title" placeholder="강의 제목">
+		</td>
+		<td rowspan="4" style="height: 300px">
+			<img src="" id="image" name="image" style="max-width: 500px;"/>
+		</td>
+	</tr>
+	<tr style="text-align: left;">
+		<td>
+			<select id="category" name="category">
+				<option>카테고리</option>
+				<option>요리</option>
+				<option>디자인</option>
+			</select>
+		</td>
+	</tr>
+	<tr style="text-align: left;">
+		<td style="border-bottom: 0;">
+			<input type="file" id="fileload" name="fileload"><!-- class="files" -->
+		</td>
+	</tr>
+	<tr style="text-align: left;">
+		<td style="border-top: 0;">
+			1MB이하의 jpg, png 확장자 파일만 적용 가능합니다
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" style="border: 0;">
+			<textarea cols="200" rows="30" id="summernote" name="content" placeholder="강의 내용"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" style="border: 0;">
+			<button type="button" class="btn btn-secondary" style="margin-top: 20px;">강의 등록</button>
+		</td>
+	</tr>
+	</table>
+	</form>
 </div>
 
 <script type="text/javascript">

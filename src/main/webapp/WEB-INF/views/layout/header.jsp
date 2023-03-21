@@ -14,28 +14,33 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 
 <div class="header">
 	<div class="header-top">
-		<a href="mainpage" style="margin: 16px;">
-			<img src="resources/images/logo-red.png" alt="logo" style="width: 75px;">
-		</a>
-		
-		<div class="search-bar">
-			<input type="text" class="form-control" id="search" name="search" placeholder="어떤 클래스를 찾으시나요?" autocomplete="off" style="width: 300px" value="<%=search %>">
-		</div>
-		
-		<div class="header-right">
-			<!-- 로그인/로그아웃 처리 -->		
-			<%
-			if(login == null){
+		<div class="d-flex flex-wrap justify-content-between align-items-center">
+			<div class="col-md-4 d-flex align-items-center">
+				<a href="mainpage" class="me-2 lh-1" style="margin: 16px;"> <img
+					src="resources/images/logo-red.png" alt="logo" style="width: 75px;">
+				</a>
+				<div class="search-bar">
+					<input type="text" class="form-control" id="search" name="search"
+						placeholder="어떤 클래스를 찾으시나요?" autocomplete="off"
+						style="width: 300px" value="<%=search%>">
+				</div>
+			</div>
+
+			<div class="justify-content-end d-flex" style="margin: 0 18px;">
+				<!-- 로그인/로그아웃 처리 -->
+				<%
+				if (login == null) {
 				%>
 				<a href="/LearnRun/login">로그인</a>
 				<%
-			}else{
+				} else {
 				%>
-				<a href="/LearnRun/myCls?id=<%=login.getId()%>">나의 강의장</a>
-				<a href="/LearnRun/logout" style="margin-left: 15px">로그아웃</a>
-				<%	
-			}
-			%>
+				<a href="/LearnRun/myCls?id=<%=login.getId()%>">나의 강의장</a> <a
+					href="/LearnRun/logout" style="margin-left: 15px">로그아웃</a>
+				<%
+				}
+				%>
+			</div>
 		</div>
 	</div>
 	
@@ -49,8 +54,8 @@ MemberDto login = (MemberDto)session.getAttribute("login");
 		            카테고리
 		          </a>
 		          <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-		            <li><a class="dropdown-item" href="/LearnRun/cls?category=cook">요리</a></li>
-		            <li><a class="dropdown-item" href="/LearnRun/cls?category=design">디자인</a></li>
+		            <li><a class="dropdown-item" href="/LearnRun/cls?category=요리">요리</a></li>
+		            <li><a class="dropdown-item" href="/LearnRun/cls?category=디자인">디자인</a></li>
 		          </ul>
 		        </li>
 		        <li class="nav-item">

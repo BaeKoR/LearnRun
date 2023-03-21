@@ -22,10 +22,10 @@ if(search == null){
 			    	<a class="nav-link <%=category.equals("") ? "active" : "" %>" href="/LearnRun/cls?search=<%=search %>">전체보기</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link <%=category.equals("cook") ? "active" : "" %>" href="/LearnRun/cls?category=cook&search=<%=search %>">요리</a>
+					<a class="nav-link <%=category.equals("요리") ? "active" : "" %>" href="/LearnRun/cls?category=요리&search=<%=search %>">요리</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link <%=category.equals("design") ? "active" : "" %>" href="/LearnRun/cls?category=design&search=<%=search %>">디자인</a>
+					<a class="nav-link <%=category.equals("디자인") ? "active" : "" %>" href="/LearnRun/cls?category=디자인&search=<%=search %>">디자인</a>
 				</li>
 			</ul>
 		</div>

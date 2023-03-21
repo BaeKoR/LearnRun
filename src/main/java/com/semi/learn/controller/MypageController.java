@@ -67,7 +67,7 @@ public class MypageController {
 	@GetMapping("createLesson")
 	public String createLesson() {
 		
-		return "mypage/createLesson";
+		return "mypagefull/createLesson";
 	}
 	
 	@GetMapping("updateLesson")
@@ -76,7 +76,7 @@ public class MypageController {
 		
 		model.addAttribute("list", list);
 		
-		return "mypage/updateLesson";
+		return "mypagefull/updateLesson";
 	}
 	
 	@GetMapping("videoUpload")

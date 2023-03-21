@@ -7,12 +7,6 @@
 <script type="text/javascript" src="resources/jquery/jquery.twbsPagination.min.js"></script>
 
 <style>
-#detail-table {
- 	margin: auto;
-}
-#detail-table td {
-	min-width: 400px;
-}
 #tbody tr {
 	border-bottom: 1px solid #ced4da;
 }
@@ -21,7 +15,7 @@
 }
 
 .reviewId {
-	width: 600px; float: left;
+	width: 775px; float: left;
 }
 .reviewId a {
 	float: right;
@@ -30,15 +24,18 @@
 	float: left;
 }
 #reviewForm textarea {
-	width: 600px;
-	height: 65px;
+	width: 745px;
+	height: 70px;
 	display: inline-block;
 }
-form button {
+#reviewForm .btn {
 	vertical-align: top;
-	width: 80px;
-	height: 65px;
-	margin: 0 10px;
+}
+#reviewForm form button {
+	vertical-align: top;
+	width: 105px;
+	height: 70px;
+	margin-left: 15px;
 }
 .profile-box {
     width: 50px;
@@ -94,56 +91,48 @@ List<Map<String, Object>> reviewlist = (List<Map<String, Object>>)request.getAtt
 int totalPages = (Integer)request.getAttribute("totalPages");
 %>
 
-<div style="padding: 30px;">
+<div class="detail-content">
 
-	<table id="detail-table">
-		<tr>
-			<td rowspan="5">
-				<img style="width: 450px; height: 300px; border-radius: 5%;" src="upload/<%=list.getNewfilename()%>" />
-			</td>
-			<td>
-				<%=list.getCategory()%>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong style="font-size: 1.4rem;"><%=list.getTitle()%></strong>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				강사 : <%=list.getId()%>
-			</td>
-		</tr>
-		<tr>
-			<td id="taking">
-				<button type="button" id="takingBtn" class="btn btn-light">수강신청 하기</button>
-			</td>
-		</tr>
-		<tr>
-			<td><div style="text-align:center;">
-				<a href="#" class="like-btn" style="display:inline-block;">
-				    <svg class="like_icon" width="28" height="26" 
-				    	viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 
-					5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z" />
-					</svg>
-				</a>
-				<div style="display:inline-block;">좋아요</div>
+		<div class="card">
+			<p class="card-text">카테고리 > <%=list.getCategory()%></p>
+			<div class="cls-img">
+				<img src="upload/<%=list.getNewfilename()%>" />
+			</div>
+			<div class="card-body">
+				<div class="body-left">
+					<h5 class="card-title"><%=list.getTitle()%></h5>
+					<div style="display: flex;">
+						<div class="cls-id">
+							<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
+						</div>
+						<p><%=list.getId() %></p>
+					</div>
 				</div>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<%=list.getContent()%>
-			</td>
-		</tr>
-	</table>
-	<hr/>
+				<div class="body-right">
+					<div id="taking">
+						<button type="button" id="takingBtn" class="btn btn-light">수강신청 하기</button>
+					</div>
+					<div style="margin-top: 17px;">
+						<a href="#" class="like-btn" style="display:inline-block;">
+						    <svg class="like_icon" width="28" height="26" viewBox="0 0 44 39" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 2C6.925 2 2 6.925 2 13C2 24 15 34 22 36.326C29 34 42 24 42 13C42 6.925 37.075 2 31 2C27.28 2 23.99 3.847 22 6.674C20.9857 5.22921 19.6382 4.05009 18.0715 3.23649C16.5049 2.42289 14.7653 1.99875 13 2Z" /></svg>
+						</a>
+						<p style="display:inline-block; margin-left: 2px;">좋아요</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<hr/>
+		
+		<div style="margin: 70px 0;">
+			<div><%=list.getContent()%></div>
+		</div>
+		
+		<hr/>
   
-  <!------------------------------------------------------------------------------------>
-  <div style="text-align: left; width: 700px; margin: auto;">
-	<h4>후기</h4>
+  <!-- 후기 작성 -->
+  <div class="cls-review">
+	<h4 style="margin: 40px 0 15px 5px;">후기</h4>
 	<div id="reviewForm"></div>
 	
 	<table>
@@ -160,17 +149,17 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			Map<String, Object> map = reviewlist.get(i);
 			%>
 			<tr>
-				<td>
+				<td style="padding-top: 10px;">
 					<div class="profile-box">
 						<img class="profile" alt="프로필 사진" src="upload/<%= map.get("newfilename") %>" />
 					</div>
 				</td>
-				<td>
+				<td style="padding: 10px 0 13px 10px;">
 					<div class="reviewId"><%= map.get("id") %></div>
 					<% 
 					if(id.equals(map.get("id"))) {
 						%>
-						<a href="#" class="show-update">수정</a>
+						<a href="javascript:void(0);" class="show-update">수정</a>
 						<% 
 					}
 					%>
@@ -184,7 +173,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 		</tbody>
 	</table>
 	
-	<div class="container">
+	<div class="container" style="margin-top: 30px;">
 		<nav aria-label="Page navigation">
 			<ul class="pagination" id="pagination" style="justify-content:center"></ul>
 		</nav>
@@ -242,8 +231,8 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 				let str = '<form action="/LearnRun/updateReview" method="post">'
 					+ '<input type="hidden" name="cls_seq" value="<%= list.getSeq() %>" />'
 	  	  			+ '<input type="hidden" name="id" value="<%= id %>" />'
-	  	  	  		+ '<textarea name="content" class="form-control">' + $(this).next().text() + '</textarea>'
-	  				+ '<button id="updateBtn" type="button" class="btn btn-light">작성</button></form>';
+	  	  	  		+ '<textarea name="content" class="form-control" style="width: 800px;">' + $(this).next().text() + '</textarea>'
+	  				+ '<button id="updateBtn" type="button" class="btn btn-light" style="margin-top: 6px;">작성</button></form>';
 				$(this).next().html(str);
 			});
 			$(document).on("click","#updateBtn", function() {
@@ -362,7 +351,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 									+ '</div></td><td>'
 									+ '<div class="reviewId">' + map.id + '</div>';
 							if("<%=id%>" === map.id) {
-								str += '<a href="#" id="show-update">수정</a>';
+								str += '<a href="javascript:void(0);" id="show-update">수정</a>';
 							}
 							str += '<div class="reviewContent">' + map.content + '</div>'
 								+ '</td></tr>';
