@@ -130,7 +130,7 @@ public class MypageController {
 		}
 		
 		else {
-			filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
+			filecheck = originalFileName.substring(originalFileName.lastIndexOf('.')); // 확장자 제한
 			filesize = fileload.getBytes().length; // 파일크기 제한
 			
 			if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
