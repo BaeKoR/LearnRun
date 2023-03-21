@@ -29,6 +29,9 @@
 	border-radius: 10px;
  
 }
+button{
+	width: 100%;
+}
 
 </style>
 
@@ -47,7 +50,7 @@
 <p id="pwdCheckWrite"></p>
 <button type="button" id="pwdUpdateBtn" class="btn btn-dark btn-lg btn-block">변경하기</button>
 <br><br>
-<a href="login">로그인하기</a>		<!-- 로그인페이지 이동 -->
+<a href="login" style="text-decoration: underline !important;">로그인하기</a>		<!-- 로그인페이지 이동 -->
 
 </div>
 </section>
