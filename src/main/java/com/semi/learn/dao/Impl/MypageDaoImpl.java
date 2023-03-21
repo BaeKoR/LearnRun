@@ -29,7 +29,7 @@ public class MypageDaoImpl implements MypageDao {
 	
 	@Override
 	public int delMember(MemberDto dto) {
-		return session.delete(ns + "delMember", dto);
+		return session.insert(ns + "delMember", dto);
 	}
 
 	@Override

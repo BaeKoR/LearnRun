@@ -27,11 +27,11 @@
 		order by a.wdate desc
 	</select>
 	
-	<delete id="delMember" parameterType="com.semi.learn.dto.MemberDto">
-		delete from member
-		where id=#{id} and pwd=#{pwd}
-	</delete>
-	
+	<insert id="delMember" parameterType="com.semi.learn.dto.MemberDto">
+		insert into quitreq(id, wdate)
+		values(#{id}, now())
+	</insert>
+		
 	<select id="clslist" parameterType="String" resultType="com.semi.learn.dto.ClsDto">
 		select seq, id, category, title, content, wdate, recommend, filename, newfilename
 		from cls

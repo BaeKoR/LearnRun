@@ -27,7 +27,6 @@
 #card-list>.card {
 	display: none; 
 	width: 800px;
-	float: left;
 }
 .card-body>span:first-child {
 	font-weight: 600;
