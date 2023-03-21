@@ -152,6 +152,9 @@ function setImageFromFile(input, expression) {
 // 메인화면 페이지 로드 함수
 $(document).ready(function () {
     $('#summernote').summernote({
+    	toolbar: [
+    	    ['style', ['style', 'fontname', 'bold', 'italic', 'underline', 'strikethrough', 'fontsize', 'color', 'paragraph', 'table', 'clear']]
+    	  ],
         placeholder: '내용을 작성하세요',
         height: 400,
         maxHeight: 400
