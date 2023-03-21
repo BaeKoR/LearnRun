@@ -142,54 +142,59 @@ public class ClsController {
 	public String updateCls(Model model, ClsDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) throws IOException {
 		String originalFileName = fileload.getOriginalFilename();
 		
-		String filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
-		int filesize = fileload.getBytes().length; // 파일크기 제한
+		String filecheck = "";
+		int filesize = 0;
 		String clsnotimage = "";
 		String clstoobig = "";
 		
-		if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
-			if (filesize < 1048577) { // 1MB
-				if (originalFileName != null && !originalFileName.equals("")) { // 파일이 변경됨
-					String newfilename = clsUtil.getNewFileName(originalFileName);
-					
-					dto.setFilename(originalFileName);
-					dto.setNewfilename(newfilename);
-					
-					String fupload = req.getServletContext().getRealPath("/upload");
-					File file = new File(fupload + "/" + newfilename);
-					
-					try {
-						// 새로운 파일로 업로드
-						FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+		if (originalFileName.equals("")) {
+			service.updateCls(dto);
+		}
+		
+		else {
+			filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
+			filesize = fileload.getBytes().length; // 파일크기 제한
+			
+			if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
+				if (filesize < 1048577) { // 1MB
+						String newfilename = clsUtil.getNewFileName(originalFileName);
 						
-						// db 갱신
-						service.updateCls(dto);
-					}
-					catch (IOException e) {
-						e.printStackTrace();
-					}
+						dto.setFilename(originalFileName);
+						dto.setNewfilename(newfilename);
+						
+						String fupload = req.getServletContext().getRealPath("/upload");
+						File file = new File(fupload + "/" + newfilename);
+						
+						try {
+							// 새로운 파일로 업로드
+							FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+							
+							// db 갱신
+							service.updateCls(dto);
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
 				}
-				else { // 파일이 변경되지 않음
-					service.updateCls(dto);
+				else {
+					clstoobig = "clstoobig";
+						
+					model.addAttribute("clstoobig", clstoobig);
+					model.addAttribute("seq", dto.getSeq());
+					
+					return "message";
 				}
 			}
 			else {
-				clstoobig = "clstoobig";
+				clsnotimage = "clsnotimage";
 					
-				model.addAttribute("clstoobig", clstoobig);
+				model.addAttribute("clsnotimage", clsnotimage);
 				model.addAttribute("seq", dto.getSeq());
 				
 				return "message";
 			}
 		}
-		else {
-			clsnotimage = "clsnotimage";
-				
-			model.addAttribute("clsnotimage", clsnotimage);
-			model.addAttribute("seq", dto.getSeq());
-			
-			return "message";
-		}
+		
 			
 		return "redirect:/manageCls?id=" + dto.getId();
 	}

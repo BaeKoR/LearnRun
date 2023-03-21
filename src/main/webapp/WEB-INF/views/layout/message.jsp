@@ -185,6 +185,30 @@ if(profiletoobig != null && !profiletoobig.equals("")) {
 	</script>
 	<%
 }
+
+String notvideo = (String)request.getAttribute("notvideo");
+if(notvideo != null && !notvideo.equals("")){
+	int seq = (Integer)request.getAttribute("seq");
+	
+	%>
+	<script type="text/javascript">
+	alert("mp4, mkv 확장자 파일만 적용 가능합니다");
+	location.href="videoUpload?seq=" + <%=seq%>;
+	</script>
+	<%
+}
+
+String toobigvideo = (String)request.getAttribute("toobigvideo");
+if(toobigvideo != null && !toobigvideo.equals("")) {
+	int seq = (Integer)request.getAttribute("seq");
+	
+	%>
+	<script type="text/javascript">
+	alert("900MB이하 파일만 적용 가능합니다");
+	location.href="videoUpload?seq=" + <%=seq%>";
+	</script>
+	<%
+}
 %>
 
 

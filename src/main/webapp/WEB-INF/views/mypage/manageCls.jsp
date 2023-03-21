@@ -18,7 +18,7 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 <body>
 
 <!-- 강의 등록 -->
-<a href="/LearnRun/createLesson"><h1>클래스 등록</h1></a>
+<a href="/LearnRun/createLesson"><button class="btn btn-secondary" style="margin-top: 20px;">클래스 등록</button></a>
 
 <!-- 내 강의 출력 -->
 <div class="clslist">
@@ -47,10 +47,10 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 							<% } %>
 						</div>
 						<div class="cls-title"><%=cls.getTitle() %></div>
-						<div class="cls-id">
+						<%-- <div class="cls-id">
 							<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
 							<p><%=cls.getId() %></p>
-						</div>
+						</div> --%>
 						<div><a href="/LearnRun/updateLesson?seq=<%=cls.getSeq()%>">클래스수정</a></div>
 						<div><a href="/LearnRun/videoUpload?seq=<%=cls.getSeq()%>">영상추가</a></div>
 					</a>

@@ -121,17 +121,17 @@ public class LessonController {
 	}
 	
 	@PostMapping(value = "writeLesson")
-	public String writeLesson(Model model, LessonDto dto, String id,@RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req){ // HttpServletRequest는 업로드 경로를 수정하기 위해 사용 됨
+	public String writeLesson(Model model, LessonDto dto, String id, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) throws IOException{ // HttpServletRequest는 업로드 경로를 수정하기 위해 사용 됨
 		// filename 취득
 		String filename = fileload.getOriginalFilename(); // 원본의 파일명
 		
-		/*String filecheck = filename.substring(filename.indexOf('.')); // 확장자 제한
+		String filecheck = filename.substring(filename.indexOf('.')); // 확장자 제한
 		int filesize = fileload.getBytes().length; // 파일크기 제한
-		String notimage = "";
-		String toobig = "";
+		String notvideo = "";
+		String toobigvideo = "";
 		
 		if (filecheck.equals(".mp4") || filecheck.equals(".mkv")) {
-			if (filesize < 944766976) { // 900MB*/
+			if (filesize < 944766976) { // 900MB
 				dto.setFilename(filename);
 				
 				String fupload = req.getServletContext().getRealPath("/upload");
@@ -155,22 +155,24 @@ public class LessonController {
 				catch (IOException e) {
 					e.printStackTrace();
 				}
-			/*}
+			}
 			else {
-				toobig = "toobig";
+				toobigvideo = "toobigvideo";
 				
-				model.addAttribute("toobig", toobig);
+				model.addAttribute("toobigvideo", toobigvideo);
+				model.addAttribute("seq", dto.getCls_seq());
 				
 				return "message";
 			}
 		}
 		else {
-			notimage = "notimage";
+			notvideo = "notvideo";
 			
-			model.addAttribute("notimage", notimage);
+			model.addAttribute("notvideo", notvideo);
+			model.addAttribute("seq", dto.getCls_seq());
 			
 			return "message";
-		}*/
+		}
 		
 		return "redirect:/manageCls?id=" + id;
 	}

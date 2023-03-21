@@ -59,5 +59,10 @@ public class MypageServiceImpl implements MypageService {
 	public List<ClsDto> getLikeCls(String id) {
 		return dao.getLikeCls(id);
 	}
+	
+	@Override
+	public MemberDto login(MemberDto dto) {
+		return dao.login(dto);
+	}
 
 }
