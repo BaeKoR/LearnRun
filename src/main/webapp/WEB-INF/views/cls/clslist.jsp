@@ -51,7 +51,7 @@ if(category == "" || category == null){
 						</div>
 						<div class="cls-title"><%=cls.getTitle() %></div>
 						<div class="cls-id">
-							<div class="cls-profile"><img src="upload/<%=login.getNewfilename() %>" alt="클래스작성자"></div>
+							<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
 							<p><%=cls.getId() %></p>
 						</div>
 					</a>
