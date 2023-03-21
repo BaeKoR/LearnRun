@@ -21,17 +21,24 @@
 	left: 50%;
 	transform: translate(-50%, -50%) ;   
 	background-color: white;
-	padding: 20px;
+	padding: 30px;
 	border-radius: 10px !important;
  
 }
 
 pre{
-	font-size: 12px;
+	font-size: 15px;
 }
 
+button{
+	width: 100%;
+}
 
+a{
+	text-decoration: underline;
+}
 </style>
+
 
 </head>
 <body>
@@ -39,17 +46,19 @@ pre{
 
 <section class="vh-100" style="background-color: #F8EEE1 ;">
 
-<div >
+<div>
 <form class="find_form">
 
 
-<h3>비밀번호 찾기</h3>
+<h3><b>비밀번호 찾기</b></h3>
 <br>
 <div>
-<pre>
-가입하신 이메일 주소를 입력해 주세요.<br>
-이메일 주소로 비밀번호를 재설정할 수 있는 이메일을 보내드립니다.
-</pre>
+<p>
+가입하신 이메일 주소를 입력해 주세요. <br>
+이메일 주소로 비밀번호를 재설정할 수 있는 <br>
+이메일을 보내드립니다.
+</p>
+
 <br>
 </div>
 
@@ -60,7 +69,7 @@ pre{
 <br><br>
 <button type="button" class="btn btn-dark btn-lg btn-block" id="mailSendbtn">전송하기</button>
 <br><br>
-<a href="login" style="text-decoration: underline;">로그인하기</a>
+<a href="login" >로그인하기</a>
 
 
 

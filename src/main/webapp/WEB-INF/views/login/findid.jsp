@@ -20,9 +20,15 @@
 	left: 50%;
 	transform: translate(-50%, -50%) ; 
 	background-color: white;  
-	padding: 20px;
+	padding: 30px;
 	font-family: 'Yaldevi Colombo SemiBold'!important;
+	border-radius: 10px;
+	
  
+}
+
+button{
+	width: 100%;
 }
 
 </style>
@@ -36,7 +42,8 @@
 
 
 <div align="center" class="find_form" >
-<h3>아이디찾기</h3>
+<div style="margin-bottom: 10px">
+<h4><b>아이디찾기</b></h4>
 <br>
 
 
@@ -44,21 +51,22 @@
 <input type="text" id="email" name="email" size="30" class="form-control email-input"  placeholder="가입한 이메일을 입력하세요">
 <br><br>
 <button type="button" id="findIdBtn" class="btn btn-dark btn-lg btn-block" >아이디 찾기</button>
+</div>
+<br><br>
 
+<div style=" margin-bottom: 0">
+<h4><b>가입정보</b></h4>
 <br>
-
-
-<h3>가입정보</h3>
-<input type="text" id="regiId" class="form-control email-input"  readonly="readonly" >
+<input type="text" id="regiId" class="form-control email-input"  readonly="readonly" value="가입한 아이디">
 <br><br>
 
 <button type="button" onclick="location.href='findPassword'" 
 class="btn btn-dark btn-lg btn-block" >비밀번호 찾기</button>
-<br>
+<br><br>
 <a href="login" style="text-decoration: underline;">로그인하기</a>
 <!-- <button type="button" onclick="location.href='login'">로그인</button> -->
 </div>
-
+</div>
 
 
 </div>

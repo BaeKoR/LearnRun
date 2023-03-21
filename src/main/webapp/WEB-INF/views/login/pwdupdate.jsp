@@ -25,7 +25,8 @@
 	left: 50%;
 	transform: translate(-50%, -50%) !important;   
 	background-color: white;
-	padding: 20px;
+	padding: 30px;
+	border-radius: 10px;
  
 }
 
