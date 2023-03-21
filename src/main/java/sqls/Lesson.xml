@@ -5,7 +5,7 @@
 
 	<select id="getLesson" parameterType="Integer" resultType="com.semi.learn.dto.LessonDto">
 		select * from lesson
-		where seq=#{les_seq}
+		where cls_seq=#{cls_seq}
 	</select>
 	
 	<select id="getLessonList" parameterType="Integer" resultType="com.semi.learn.dto.LessonDto">
@@ -45,5 +45,10 @@
 		values(#{les_seq}, (select ref from qna a where seq=#{seq}),
 					  (select step from qna b where seq=#{seq})+1,
 					  #{id}, #{content}, now())
+	</insert>
+	
+	<insert id="writeLesson" parameterType="com.semi.learn.dto.LessonDto">
+		insert into lesson(cls_seq, title, content, filename, newfilename)
+		values(#{cls_seq}, #{title}, #{content}, #{filename}, #{newfilename})
 	</insert>
 </mapper>

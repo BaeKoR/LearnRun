@@ -15,4 +15,6 @@ public interface LessonDao {
 	int countQna(int les_seq);
 	int writeQue(QnaDto dto);
 	int writeAns(QnaDto dto);
+	
+	int writeLesson(LessonDto dto);
 }

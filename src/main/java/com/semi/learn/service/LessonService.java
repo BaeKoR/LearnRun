@@ -15,4 +15,6 @@ public interface LessonService {
 	int countQna(int les_seq);
 	boolean writeQue(QnaDto dto);
 	boolean writeAns(QnaDto dto);
+	
+	boolean writeLesson(LessonDto dto);
 }
