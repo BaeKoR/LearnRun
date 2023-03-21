@@ -62,8 +62,8 @@ public class ClsController {
 	public String recClslist(Model model) {
 		System.out.println("MemberController recClslist " + new Date());
 		
-		List<ClsDto> cookReclist = service.recClslist("cook");
-		List<ClsDto> designReclist = service.recClslist("design");
+		List<ClsDto> cookReclist = service.recClslist("요리");
+		List<ClsDto> designReclist = service.recClslist("디자인");
 		
 		model.addAttribute("cookReclist", cookReclist);
 		model.addAttribute("designReclist", designReclist);
@@ -88,7 +88,7 @@ public class ClsController {
 		// filename 취득
 		String filename = fileload.getOriginalFilename(); // 원본의 파일명
 		
-		String filecheck = filename.substring(filename.indexOf('.')); // 확장자 제한
+		String filecheck = filename.substring(filename.lastIndexOf('.')); // 확장자 제한
 		int filesize = fileload.getBytes().length; // 파일크기 제한
 		String notimage = "";
 		String toobig = "";
@@ -152,7 +152,7 @@ public class ClsController {
 		}
 		
 		else {
-			filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
+			filecheck = originalFileName.substring(originalFileName.lastIndexOf('.')); // 확장자 제한
 			filesize = fileload.getBytes().length; // 파일크기 제한
 			
 			if (filecheck.equals(".png") || filecheck.equals(".jpg")) {

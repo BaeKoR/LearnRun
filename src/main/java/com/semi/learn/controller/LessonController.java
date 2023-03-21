@@ -125,7 +125,7 @@ public class LessonController {
 		// filename 취득
 		String filename = fileload.getOriginalFilename(); // 원본의 파일명
 		
-		String filecheck = filename.substring(filename.indexOf('.')); // 확장자 제한
+		String filecheck = filename.substring(filename.lastIndexOf('.')); // 확장자 제한
 		int filesize = fileload.getBytes().length; // 파일크기 제한
 		String notvideo = "";
 		String toobigvideo = "";
