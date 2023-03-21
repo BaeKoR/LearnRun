@@ -170,7 +170,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 					<% 
 					if(id.equals(map.get("id"))) {
 						%>
-						<a href="#" id="show-update">수정</a>
+						<a href="#" class="show-update">수정</a>
 						<% 
 					}
 					%>
@@ -238,11 +238,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			});
 			
 			/* 후기 수정 */
-			$(document).on("click","#show-update", function() {
+			$(document).on("click",".show-update", function() {
 				let str = '<form action="/LearnRun/updateReview" method="post">'
 					+ '<input type="hidden" name="cls_seq" value="<%= list.getSeq() %>" />'
 	  	  			+ '<input type="hidden" name="id" value="<%= id %>" />'
-	  	  	  		+ '<textarea name="content" class="form-control"><%= list.getContent() %></textarea>'
+	  	  	  		+ '<textarea name="content" class="form-control">' + $(this).next().text() + '</textarea>'
 	  				+ '<button id="updateBtn" type="button" class="btn btn-light">작성</button></form>';
 				$(this).next().html(str);
 			});

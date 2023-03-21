@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,10 +175,14 @@ public class MypageController {
 	}
 	
 	@PostMapping("quitAf")
-	public String quitAf(MemberDto dto, Model model) {
+	public String quitAf(MemberDto dto, Model model, HttpServletRequest req) {
 		String quit = "";
 		if(service.delMember(dto)) {
 			quit = "OK";
+			HttpSession session = req.getSession(false);
+		    if (session != null) {
+		        session.invalidate();
+		    }
 		} else {
 			quit = "NO";
 		}

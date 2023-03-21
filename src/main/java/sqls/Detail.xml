@@ -47,7 +47,7 @@
 	<update id="updateReview" parameterType="com.semi.learn.dto.ReviewDto">
 		update review
 		set content=#{content}
-		where id=#{id} and seq=#{seq}
+		where id=#{id} and cls_seq=#{cls_seq}
 	</update>
 	
 	<insert id="takeCls" parameterType="com.semi.learn.dto.ClsDto">
