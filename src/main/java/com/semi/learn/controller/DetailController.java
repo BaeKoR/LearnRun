@@ -99,7 +99,7 @@ public class DetailController {
 	@PostMapping("updateReview")
 	public String updateReview(ReviewDto dto, Model model) {
 		
-		if(service.updateReview(dto)) {
+		if(!service.updateReview(dto)) {
 			System.out.println("리뷰 수정 실패");
 		}
 		
