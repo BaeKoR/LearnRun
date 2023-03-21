@@ -36,7 +36,7 @@ List<ClsDto> designlist = (List<ClsDto>)request.getAttribute("designReclist");
 								</div>
 								<div class="cls-title"><%=cookcls.getTitle() %></div>
 								<div class="cls-id">
-									<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
+									<!-- <div class="cls-profile"><img src="..." alt="클래스작성자"></div> -->
 									<p><%=cookcls.getId() %></p>
 								</div>
 							</a>
@@ -75,7 +75,7 @@ List<ClsDto> designlist = (List<ClsDto>)request.getAttribute("designReclist");
 								</div>
 								<div class="cls-title"><%=designcls.getTitle() %></div>
 								<div class="cls-id">
-									<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
+									<!-- <div class="cls-profile"><img src="..." alt="클래스작성자"></div> -->
 									<p><%=designcls.getId() %></p>
 								</div>
 							</a>

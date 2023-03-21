@@ -116,14 +116,25 @@ public class MypageController {
 	public String updateMemberAf(Model model, MemberDto dto, @RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req) throws IOException {
 		String originalFileName = fileload.getOriginalFilename();
 		
-		String filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
-		int filesize = fileload.getBytes().length; // 파일크기 제한
+		String filecheck = "";
+		int filesize = 0;
 		String profilenotimage = "";
 		String profiletoobig = "";
 		
-		if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
-			if (filesize < 1048577) { // 1MB
-				if (originalFileName != null && !originalFileName.equals("")) { // 파일이 변경됨
+		if (originalFileName.equals("")) {
+			service.updateMemerAf(dto);
+			
+			// login session 갱신
+			MemberDto mem = service.login(dto);
+			req.getSession().setAttribute("login", mem);
+		}
+		
+		else {
+			filecheck = originalFileName.substring(originalFileName.indexOf('.')); // 확장자 제한
+			filesize = fileload.getBytes().length; // 파일크기 제한
+			
+			if (filecheck.equals(".png") || filecheck.equals(".jpg")) {
+				if (filesize < 1048577) { // 1MB
 					String newfilename = clsUtil.getNewFileName(originalFileName);
 					
 					dto.setFilename(originalFileName);
@@ -138,31 +149,30 @@ public class MypageController {
 						
 						// db 갱신
 						service.updateMemerAf(dto);
+						
+						// login session 갱신
+						MemberDto mem = service.login(dto);
+						req.getSession().setAttribute("login", mem);
 					}
 					catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-				else { // 파일이 변경되지 않음
-					service.updateMemerAf(dto);
+				else {
+					profiletoobig = "profiletoobig";
+					
+					model.addAttribute("profiletoobig", profiletoobig);
+				
+					return "message";
 				}
 			}
 			else {
-				profiletoobig = "profiletoobig";
-					
-				model.addAttribute("profiletoobig", profiletoobig);
-				model.addAttribute("id", dto.getId());
+				profilenotimage = "profilenotimage";
 				
+				model.addAttribute("profilenotimage", profilenotimage);
+			
 				return "message";
 			}
-		}
-		else {
-			profilenotimage = "profilenotimage";
-				
-			model.addAttribute("profilenotimage", profilenotimage);
-			model.addAttribute("id", dto.getId());
-			
-			return "message";
 		}
 		
 		return "redirect:/pwdCheck";

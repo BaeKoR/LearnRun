@@ -39,7 +39,7 @@ button{
 <body>
 <section class="vh-100" style="background-color: #F8EEE1 ;">
 <div align="center" class="find_form" >
-<h3>비밀번호 재설정</h3>
+<h3><b>비밀번호 재설정</b></h3>
 <br>
 <p>새로운 비밀번호를 입력해주세요.</p>
 <br><br>

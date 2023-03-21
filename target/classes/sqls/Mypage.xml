@@ -55,4 +55,10 @@
 		set pwd=#{pwd}, name=#{name}, phone=#{phone}, filename=#{filename}, newfilename=#{newfilename}
 		where id=#{id}
 	</update>
+	
+	<select id="login" parameterType="com.semi.learn.dto.MemberDto" resultType="com.semi.learn.dto.MemberDto">
+	select id, pwd, name, email, phone, newfilename
+	from member
+	where id=#{id} and pwd=#{pwd}
+</select>
 </mapper>

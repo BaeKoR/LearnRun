@@ -19,12 +19,12 @@ int seq = (Integer)request.getAttribute("seq");
 <input type="hidden" id="id" name="id" value="<%=login.getId()%>">
 <input type="hidden" id="cls_seq" name="cls_seq" value="<%=seq%>">
 
-<table>
-<col width="100">
+<table style="margin: auto;">
+<col width="1000">
 
 <tr>
 	<td>
-		<input type="text" id="title" name="title" placeholder="영상 제목">
+		<input type="text" id="title" name="title" class="form-control form-control-lg" placeholder="영상 제목">
 	</td>
 </tr>
 
@@ -33,15 +33,19 @@ int seq = (Integer)request.getAttribute("seq");
 		<input type="file" id="fileload" name="fileload">
 	</td>
 </tr>
-
 <tr>
 	<td>
-		<textarea id="content" name="content" placeholder="강의 내용"></textarea>
+		900MB이하의 mp4, mkv 확장자 파일만 적용 가능합니다
 	</td>
 </tr>
 <tr>
 	<td>
-		<button type="button">강의 등록</button>
+		<textarea id="content" name="content" class="form-control form-control-lg" placeholder="강의 내용"></textarea>
+	</td>
+</tr>
+<tr>
+	<td>
+		<button type="button" class="btn btn-secondary" style="margin-top: 20px;">강의 등록</button>
 	</td>
 </tr>
 </table>

@@ -47,7 +47,7 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("likecls");
 						</div>
 						<div class="cls-title"><%=cls.getTitle() %></div>
 						<div class="cls-id">
-							<div class="cls-profile"><img src="..." alt="."></div>
+							<!-- <div class="cls-profile"><img src="..." alt="."></div> -->
 							<p><%=cls.getId() %></p>
 						</div>
 					</a>

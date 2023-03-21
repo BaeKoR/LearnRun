@@ -23,4 +23,6 @@ public interface MypageService {
 	
 	List<ClsDto> getTakingCls(String id);
 	List<ClsDto> getLikeCls(String id);
+	
+	MemberDto login(MemberDto dto);
 }

@@ -61,5 +61,10 @@ public class MypageDaoImpl implements MypageDao {
 	public List<ClsDto> getLikeCls(String id) {
 		return session.selectList(ns + "getLikeCls", id);
 	}
+	
+	@Override
+	public MemberDto login(MemberDto dto) {
+		return session.selectOne(ns + "login", dto);
+	}
 
 }
