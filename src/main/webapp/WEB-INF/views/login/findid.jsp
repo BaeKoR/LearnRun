@@ -63,7 +63,7 @@ button{
 <button type="button" onclick="location.href='findPassword'" 
 class="btn btn-dark btn-lg btn-block" >비밀번호 찾기</button>
 <br><br>
-<a href="login" style="text-decoration: underline;">로그인하기</a>
+<a href="login" style="text-decoration: underline!important;">로그인하기</a>
 <!-- <button type="button" onclick="location.href='login'">로그인</button> -->
 </div>
 </div>

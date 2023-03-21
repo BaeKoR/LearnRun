@@ -123,7 +123,7 @@ span{
 
 
 
-<!-- <div class="box" align="center" style="background-color: white;"> -->
+
 <h3><b>회원가입</b></h3>
 <br><br>
 <!-- <form id="regiFrm"> -->
@@ -136,7 +136,7 @@ span{
 </div>
 
 <div style="width: 200px; text-align: right;">
-<button type="button" id="idChkBtn" class="btn btn-dark"  >아이디중복확인</button>
+<button type="button" id="idChkBtn" class="btn btn-dark"  >아이디중복 확인</button>
 </div>
 </div>
 
@@ -166,7 +166,7 @@ span{
 	</div>
 	
 	<div style="width: 200px; text-align: right;">
-		<button type="button" id="mailCheckBtn" class="btn btn-dark">이메일 인증</button><br>
+		<button type="button" id="mailCheckBtn" class="btn btn-dark">인증</button><br>
 	</div>
 </div>	
 <br>
@@ -176,7 +176,7 @@ span{
 	<input type="text" id="mailCertiNum" name="mail_key"  class="form-control email-input"  placeholder="인증번호를 입력하세요">
 	</div>
 	<div style="width: 200px; text-align: right;">
-		<button type="button" id="mailKeyCheckBtn" class="btn btn-dark">인증번호확인</button><br>
+		<button type="button" id="mailKeyCheckBtn" class="btn btn-dark">확인</button><br>
 	</div>
 	
 	<p id="emailCheckWrite" class="auth-block__invalid" ></p>		<!-- 인증번호를 확인해주세요 -->
@@ -194,68 +194,6 @@ span{
 
 	<input type="submit" class="btn btn-dark btn-lg btn-block" value="회원가입">				
 </div>
-<!-- </div> -->
-<!-- <input type="button" id="idChkBtn" value="아이디중복확인"> -->
-
-
-<!-- <tr>
-	<td>아이디</td>
-	<td>
-		<input type="text" name="id" id="id" size="20"><br>
-		<p id="idcheck" ></p>
-		<input type="button" id="idChkBtn" value="아이디중복확인">
-	</td>
-</tr> -->
-<!-- <tr>
-	
-	<td>
-		<input type="text" name="pwd" id="pwd" size="20" placeholder="패스워드">
-		<p id="pwdValid"></p>
-	</td>
-</tr> -->
-<!-- <tr>
-	<td>패스워드확인</td>
-	<td>
-		<input type="text" id="pwdCheck" name="pwdCheck" size="20"><br>
-		<p id="pwdCheckWrite" ></p>	비밀번호를 확인해주십시오 입력칸
-	</td>
-</tr> -->
-
-<!-- <tr>
-	<td>이름</td>
-	<td>
-		<input type="text" name="name" id="name" size="20">
-	</td>
-</tr> -->
-<!-- <tr>
-	<td>이메일</td>
-	<td>
-		<input type="text" name="email" id="email" size="20">
-		<button type="button" id="mailCheckBtn">인증</button><br>
-		<input type="text" id="mailCertiNum" name="mail_key" placeholder="인증번호를 입력하세요">
-		<button type="button" id="mailKeyCheckBtn">인증번호확인</button><br>
-		<p id="emailCheckWrite" style="font-size: 8px"></p>		인증번호를 확인해주세요
-	</td>
-</tr> -->
-
-<!-- <tr>
-	<td>전화번호</td>
-	<td>
-		<input type="text" name="phone" id="phone" size="20">
-	</td>
-</tr> -->
-<!-- <tr>
-	<td colspan="2">
-		<input type="checkbox" id="TermAgree"> [필수]이용약관 및 개인정보 수집동의<br>
-		<input type="checkbox" id="MarketingAgree"> [선택]마케팅정보 수집 활용동의
-	</td>
-</tr>
-
-<tr>
-	<td colspan="2" align="center">
-		<input type="submit" value="회원가입">		
-	</td>
-</tr> -->
 
 
 </form>
@@ -270,8 +208,8 @@ $(document).ready(function() {
 	$("#mailCertiNum").hide();
 	$("#mailKeyCheckBtn").hide();
 	
-	let idCheck = false;		// id 중복검사 완료했는지 여부
-	let emailVerified = false;	// 이메일 인증완료했는지 여부
+	var idCheck = false;		// id 중복검사 완료했는지 여부
+	var emailVerified = false;	// 이메일 인증완료했는지 여부
 	
 	
 	$("#idChkBtn").click(function() {
@@ -310,12 +248,15 @@ $(document).ready(function() {
 					$("#idcheck").css("color", "#0000ff");
 					$("#idcheck").text("사용할 수 있는 아이디입니다");
 					idCheck = true;		// 중복검사 완료
+					return;
 				}else{
 					$("#idcheck").css("color", "#ff0000");
 					$("#idcheck").text("사용중인 아이디입니다");
 					$("#id").val("");
 					idCheck = false;
+					return;
 				}
+				
 			},
 			error:function(){
 				alert('error');
@@ -323,6 +264,8 @@ $(document).ready(function() {
 		});
 		
 	});
+	
+	
 	
 	// 이메일 인증메일 발송
 	$("#mailCheckBtn").click(function() {		
@@ -375,6 +318,7 @@ $(document).ready(function() {
 									$("#mailCertiNum").val("");
 									emailVerified = false;
 								}
+								
 							});
 						},
 						error:function(){
@@ -433,9 +377,8 @@ $(document).ready(function() {
 	$("#regiFrm").submit(function(event) {
 		if (!idCheck) { 				// id 중복검사가 완료되지 않은 경우
 			alert("아이디 중복검사를 완료해주십시오.");
-			event.preventDefault(); 	// submit 이벤트 취소
-			
-		} else if (!emailVerified){		// 이메일 인증이 완료되지 않은 경우	
+			event.preventDefault(); 	// submit 이벤트 취소					
+		}else if (!emailVerified){		// 이메일 인증이 완료되지 않은 경우	
 			alert("이메일 인증을 완료해주십시오.");
 			event.preventDefault();	// submit 이벤트 취소
 			
@@ -460,7 +403,7 @@ $(document).ready(function() {
 	        alert("이용약관 및 개인정보 수집동의에 동의해야 합니다.");
 	        event.preventDefault(); // submit 이벤트 취소
 		}
-		
+		idCheck = false;		// 다시 아이디체크 초기화	
 	});
 	
 });

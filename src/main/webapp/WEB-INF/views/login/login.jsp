@@ -13,10 +13,6 @@
 button{
 	width: 100%;
 }
-img{
-  display: block;
-  margin: auto;
-}
 
 .imgdiv{
 	/* display: flex;
@@ -25,6 +21,7 @@ img{
   margin-top: 50%;
   
 }
+
 
 </style>
 
@@ -49,63 +46,72 @@ img{
 								style="border-radius: 1rem 0 0 1rem;" />  --> <!-- 이미지넣는곳 -->
 							</div>
 						</div>
-						
-<div class="col-md-6 col-lg-7 d-flex align-items-center">
+		<!-- 글씨 센터로바꾸기 -->				
+<div class="col-md-6 col-lg-7 d-flex align-items-center" ;" >
 	<div class="card-body p-4 p-lg-5 text-black">
 	
 		<form action="loginAf" method="post">
 			<!-- loginAf 컨트롤러로 보내줌 -->
 	
-			<div class="d-flex align-items-center mb-3 pb-1">
+			<div class="align-items-center mb-3 pb-1 ">
 				<i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-				<span class="h1 fw-bold mb-0">Login</span>
+				<div class="text-center">
+					<span class="h1 fw-bold mb-0" >로그인</span>
+				</div>
 			</div>
-	
-			<h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign
-				into your account</h5>
+			<br>
+			<!-- <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign
+				into your account</h5> -->
 	
 	
 			<!-- id input -->
 			<div class="form-outline mb-4">
 				<input type="text" id="id" name="id"
-					class="form-control form-control-lg" placeholder="id" /> 
+					class="form-control form-control-lg" placeholder="아이디" /> 
 					<!-- <label class="form-label" for="form2Example17"></label> -->
 			</div>
 	
 			<!-- password input -->
 			<div class="form-outline mb-4">
 				<input type="password" id="pwd" name="pwd"
-					class="form-control form-control-lg" placeholder="password" />
+					class="form-control form-control-lg" placeholder="비밀번호" />
 				<!-- <label class="form-label" for="form2Example27"></label> -->
 			</div>
-	
+			<br>
 			<!-- 로그인버튼 -->
 			<div class="pt-1 mb-4">
-				<button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+				<button class="btn btn-dark btn-lg btn-block" type="submit">로그인</button>
 			</div>
 
-			<!-- Checkbox -->
-			<div class="form-check mb-0">
+			<!-- Checkbox -->	<!-- 글씨 왼쪽으로 -->
+			<div class="form-check mb-0 ">
 				<input class="form-check-input me-2" type="checkbox" value=""
-					id="chk_save_id" /> <label class="form-check-label"
-					for="form2Example3"> Remember me </label>
+					id="chk_save_id" /> 
+					<div style="text-align: left">
+						<label class="form-check-label"
+						for="form2Example3"> Remember me</label>
+					</div>
 			</div>
-
-			<a href="#" class="small text-muted" onclick="findId()">
-			Forgot account?/</a> 
-				
-			<a href="#" id=findPassword class="small text-muted" onclick="findPassword()">
-			Forgot password?</a>
-			
-			<p class="mb-5 pb-lg-2" style="color: #393f81;">
-				Don't have an account? 
-				<a href="#" onclick="account()" style="color: #393f81;">Register here</a>
-			</p>
-
-			<a href="#!" class="small text-muted">Terms of use.</a> 
-			<a href="#!" class="small text-muted">Privacy policy</a>
-
-			<div></div>
+			<div style="text-align: right;">
+				<a href="#" class="small text-muted" onclick="findId()">
+				아이디 찾기</a> 
+			</div>
+			<div style="text-align: right;">	
+				<a href="#" id=findPassword class="small text-muted" onclick="findPassword()">
+				비밀번호 찾기</a>
+			</div>
+			<br>
+			<div style="color:#393f81; ">
+				<p class="mb-5 pb-lg-2" style="color: #393f81;">
+					LearnRun이 처음이신가요? 				
+					<a href="#" onclick="account()" style="text-decoration: underline !important">회원 가입하기</a>					
+					
+				</p>
+			</div>
+				<a href="#!" class="small text-muted">Terms of use.</a> 
+				<a href="#!" class="small text-muted">Privacy policy</a>
+			<div>
+		</div>
 										
 		</form>
 		

@@ -69,7 +69,7 @@ a{
 <br><br>
 <button type="button" class="btn btn-dark btn-lg btn-block" id="mailSendbtn">전송하기</button>
 <br><br>
-<a href="login" >로그인하기</a>
+<a href="login" style="text-decoration: underline !important;">로그인하기</a>
 
 
 
