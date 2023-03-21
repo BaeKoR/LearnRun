@@ -78,6 +78,14 @@ public class MypageController {
 		return "mypage/updateLesson";
 	}
 	
+	@GetMapping("videoUpload")
+	public String videoUpload(Model model, int seq) {
+		
+		model.addAttribute("seq", seq);
+		
+		return "mypage/videoUpload";
+	}
+	
 	@GetMapping("myReview")
 	public String myReview(String id, Model model) {
 		List<Map<String, Object>> list = service.getMyReview(id);

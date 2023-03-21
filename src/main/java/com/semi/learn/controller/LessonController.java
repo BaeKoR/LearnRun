@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.semi.learn.dto.ClsDto;
 import com.semi.learn.dto.LessonDto;
 import com.semi.learn.dto.QnaDto;
 import com.semi.learn.dto.QnaParam;
 import com.semi.learn.service.LessonService;
+import com.semi.learn.util.clsUtil;
 
 @Controller
 public class LessonController {
@@ -110,5 +112,60 @@ public class LessonController {
 		}
 		
 		return "redirect:/lesson?cls_seq=" + cls_seq + "&les_seq=" + dto.getLes_seq();
+	}
+	
+	@PostMapping(value = "writeLesson")
+	public String writeLesson(Model model, LessonDto dto, String id,@RequestParam(value = "fileload", required = false) MultipartFile fileload, HttpServletRequest req){ // HttpServletRequest는 업로드 경로를 수정하기 위해 사용 됨
+		// filename 취득
+		String filename = fileload.getOriginalFilename(); // 원본의 파일명
+		
+		/*String filecheck = filename.substring(filename.indexOf('.')); // 확장자 제한
+		int filesize = fileload.getBytes().length; // 파일크기 제한
+		String notimage = "";
+		String toobig = "";
+		
+		if (filecheck.equals(".mp4") || filecheck.equals(".mkv")) {
+			if (filesize < 944766976) { // 900MB*/
+				dto.setFilename(filename);
+				
+				String fupload = req.getServletContext().getRealPath("/upload");
+				
+				System.out.println("fupload: " + fupload);
+				
+				// 파일명을 충돌하지 않는 이름(Date)으로 변경
+				String newfilename = clsUtil.getNewFileName(filename);
+				
+				dto.setNewfilename(newfilename); // 변경된 파일명
+				
+				File file = new File(fupload + "/" + newfilename);
+				
+				try {
+					// 실제 파일 생성 + 기입 = 업로드
+					FileUtils.writeByteArrayToFile(file, fileload.getBytes());
+					
+					// db에 저장
+					service.writeLesson(dto);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			/*}
+			else {
+				toobig = "toobig";
+				
+				model.addAttribute("toobig", toobig);
+				
+				return "message";
+			}
+		}
+		else {
+			notimage = "notimage";
+			
+			model.addAttribute("notimage", notimage);
+			
+			return "message";
+		}*/
+		
+		return "redirect:/manageCls?id=" + id;
 	}
 }

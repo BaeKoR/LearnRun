@@ -51,7 +51,8 @@ List<ClsDto> list = (List<ClsDto>)request.getAttribute("clslist");
 							<div class="cls-profile"><img src="..." alt="클래스작성자"></div>
 							<p><%=cls.getId() %></p>
 						</div>
-						<div><a href="/LearnRun/updateLesson?seq=<%=cls.getSeq()%>">수정</a></div>
+						<div><a href="/LearnRun/updateLesson?seq=<%=cls.getSeq()%>">클래스수정</a></div>
+						<div><a href="/LearnRun/videoUpload?seq=<%=cls.getSeq()%>">영상추가</a></div>
 					</a>
 				</li>
 				<%

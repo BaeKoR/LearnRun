@@ -55,4 +55,9 @@ public class LessonDaoImpl implements LessonDao {
 		return session.insert(ns + "writeAns", dto);
 	}
 
+	@Override
+	public int writeLesson(LessonDto dto) {
+		return session.insert(ns + "writeLesson", dto);
+	}
+
 }

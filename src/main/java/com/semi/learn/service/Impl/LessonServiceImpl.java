@@ -51,4 +51,10 @@ public class LessonServiceImpl implements LessonService {
 	public boolean writeAns(QnaDto dto) {
 		return dao.writeAns(dto) > 0;
 	}
+
+	@Override
+	public boolean writeLesson(LessonDto dto) {
+		int n = dao.writeLesson(dto);
+		return n>0?true:false;
+	}
 }
