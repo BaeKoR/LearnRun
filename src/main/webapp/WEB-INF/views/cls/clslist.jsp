@@ -13,10 +13,8 @@ String category = (String)request.getAttribute("category");
 String pageTitle = "";
 if(category == "" || category == null){
 	pageTitle = "클래스 전체보기";
-} else if(category.equals("cook")){
-	pageTitle = "요리 클래스";
-} else if(category.equals("design")){
-	pageTitle = "디자인 클래스";
+} else {
+	pageTitle = category + "클래스";
 }
 %>
 
