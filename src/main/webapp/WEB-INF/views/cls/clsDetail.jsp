@@ -92,7 +92,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 	<table style="margin: auto;">
 		<tr>
 			<td rowspan="5">
-				<img style="width: 500px; height: 300px; border-radius: 10%;" src="upload/<%=list.getNewfilename()%>" />
+				<img style="width: 500px; height: 300px; border-radius: 5%;" src="upload/<%=list.getNewfilename()%>" />
 			</td>
 			<td>
 				<%=list.getCategory()%>
@@ -141,6 +141,13 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 	<table>
 		<tbody id="tbody">
 		<%
+		if(reviewlist.size() == 0) {
+			%>
+			<tr>
+				<td>아직 작성된 후기가 없습니다.</td>
+			</tr>
+			<%
+		} else {
 		for(int i = 0; i < reviewlist.size(); i++) {
 			Map<String, Object> map = reviewlist.get(i);
 			%>
@@ -164,6 +171,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			</tr>
 			<%
 		}
+		}
 		%>
 		</tbody>
 	</table>
@@ -173,6 +181,7 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			<ul class="pagination" id="pagination" style="justify-content:center"></ul>
 		</nav>
 	</div>
+
   </div>
 </div>
 
@@ -252,11 +261,11 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 							$('#takingBtn').text('수강 취소');
 							/* 강의 듣기 버튼 */
 							$('#taking').append('<a href="/LearnRun/lesson?cls_seq=' + <%=list.getSeq()%> 
-												+ '">강의 들으러 가기</a>');
+												+ '" class="btn btn-secondary">강의 들으러 가기</a>');
 						} else {
 							$('#takingBtn').text('수강신청 하기');
 							/* 강의 듣기 버튼 없애기 */
-							
+							$('#taking a').detach();
 						}
 					},
 					error:function() {
@@ -264,6 +273,60 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 					}
 				});
 			});
+			
+			/* 좋아요 기능 */
+			let button = document.querySelector(".like-btn");
+			let icon = document.querySelector(".like_icon");
+			
+			button.addEventListener("click", ()=>{
+				if("<%=id%>" === "") {
+					alert('로그인 후 사용 가능합니다.');
+					return;
+				}
+				$.ajax({
+					url: "/LearnRun/likeCls",
+					type:"post",
+					data:{"id": "<%=id%>", "seq": <%=list.getSeq()%>},
+					success:function(b) {
+						button.classList.toggle("active");
+					  	if(button.classList.contains("active")) {
+					    	createClones(button);
+					  	}
+					},
+					error:function() {
+						alert('error');
+					}
+				});
+				
+			});
+			function randomNum(min, max) {
+			  return Math.floor(Math.random()*(max- min + 1 )+ min);
+			}
+
+			function negativePositve() {
+			  return Math.random() < 0.5 ? -1 : 1;
+			}
+
+			function createClones(button) {
+			  let numberOfClones = randomNum(2, 4);
+
+			  for(let i=1; i<= numberOfClones; i++) {
+			    let clone = icon.cloneNode(true);
+			    let size = randomNum(8, 20);
+			    button.appendChild(clone);
+			    clone.setAttribute("width", size);
+			    clone.setAttribute("height", size);
+			    clone.classList.add("clone");
+			    clone.style.transform = "translate("
+				    + negativePositve() * randomNum(15, 30) + "px,"
+				    + negativePositve() * randomNum(15, 30) + "px)";
+
+			    let removeNode = setTimeout(() =>{
+			      button.removeChild(clone);
+			      clearTimeout(removeNode);
+			    }, 800);
+			  }
+			}
 		});
 		
 		/* 리뷰 페이지네이션 */
@@ -303,61 +366,4 @@ int totalPages = (Integer)request.getAttribute("totalPages");
 			}
 		});
 		
-		/* 좋아요 기능 */
-		let button = document.querySelector(".like-btn");
-		let icon = document.querySelector(".like_icon");
-		
-		button.addEventListener("click", ()=>{
-			if("<%=id%>" === "") {
-				alert('로그인 후 사용 가능합니다.');
-				return;
-			}
-			$.ajax({
-				url: "/LearnRun/likeCls",
-				type:"post",
-				data:{"id": "<%=id%>", "seq": <%=list.getSeq()%>},
-				success:function(b) {
-					button.classList.toggle("active");
-				  	if(button.classList.contains("active")) {
-				    	createClones(button);
-				  	}
-				},
-				error:function() {
-					alert('error');
-				}
-			});
-			
-		});
-
-		function randomNum(min, max) {
-		  return Math.floor(Math.random()*(max- min + 1 )+ min);
-		}
-
-		function negativePositve() {
-		  return Math.random() <0.5 ? -1 : 1;
-		}
-
-		function createClones(button) {
-		  let numberOfClones = randomNum(2, 4);
-
-		  for(let i=1; i<= numberOfClones; i++) {
-		    let clone = icon.cloneNode(true);
-		    let size = randomNum(8, 20);
-		    button.appendChild(clone);
-		    clone.setAttribute("width", size);
-		    clone.setAttribute("height", size);
-		    clone.classList.add("clone");
-		    clone.style.transform = 
-		    "translate(" + 
-		    negativePositve() * randomNum(15, 30) + "px," +
-		    negativePositve() * randomNum(15, 30) + "px)";
-
-		    let removeNode = setTimeout(() =>{
-		      button.removeChild(clone);
-		      clearTimeout(removeNode);
-		    }, 800);
-		  }
-		}
 	</script>
-
-			
