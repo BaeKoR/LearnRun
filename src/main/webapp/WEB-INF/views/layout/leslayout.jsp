@@ -28,10 +28,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="width: 900px; max-width: 900px;">
+			<td style="">
 				<tiles:insertAttribute name="video" />
 			</td>
-			<td style="min-width: 300px; vertical-align: top; height: 100%; position: relative;">
+			<td style="min-width: 300px; width: 30%; max-width: 500px; vertical-align: top; height: 100%; position: relative;">
 				<tiles:insertAttribute name="sidebar" />
 			</td>
 		</tr>
